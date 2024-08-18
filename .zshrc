@@ -3,7 +3,6 @@ autoload -U promptinit; promptinit
 prompt pure
 
 if [ "$(uname -m)" = "arm64" ]; then
-    export PATH="/Users/nozomeme/opt/anaconda3/bin:$PATH" 
     eval "$(/opt/homebrew/bin/brew shellenv)"
     export "PATH=“/opt/homebrew/bin:$PATH"
 else 
