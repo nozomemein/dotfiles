@@ -36,6 +36,7 @@ alias ls='eza'
 alias ll='ls -l'
 alias cat='bat'
 alias gl='g log --oneline'
+alias cz='chezmoi'
 
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
