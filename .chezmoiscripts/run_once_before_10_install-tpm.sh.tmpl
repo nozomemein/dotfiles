@@ -1,0 +1,17 @@
+#!/bin/sh
+set -eu
+
+{{ if eq .chezmoi.os "darwin" }}
+
+TPM_DIR="$HOME/.tmux/plugins/tpm"
+
+if [ -d "$TPM_DIR/.git" ]; then
+  echo "tpm already installed: $TPM_DIR"
+  exit 0
+fi
+
+echo "Installing tpm into $TPM_DIR..."
+mkdir -p "$HOME/.tmux/plugins"
+git clone --depth=1 https://github.com/tmux-plugins/tpm "$TPM_DIR"
+
+{{ end }}
