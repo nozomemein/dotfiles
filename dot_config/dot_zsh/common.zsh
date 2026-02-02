@@ -1,3 +1,6 @@
+export VISUAL="nvim"
+export EDITOR="nvim"
+
 # ---- helpers ----
 path_prepend() { [[ -d "$1" ]] && path=("$1" $path); }
 path_append()  { [[ -d "$1" ]] && path+=("$1"); }
