@@ -1,14 +1,18 @@
-theme = "carbon"
+theme = "tokyonight"
 
 [keys.insert]
 j = { j = "normal_mode"}
 
 [keys.normal]
 d = { d = ["extend_to_line_bounds", "delete_selection"] }
+S = ":write"
 V = ["extend_to_line_bounds", "select_mode"]
+G = "goto_file_end"
+H = "goto_line_start"
+L = "goto_line_end"
 
 [keys.normal.space]
-e = { w = ":write", c = ":bc", x = ":bco", l = ":toggle lsp.display-inlay-hints" }
+e = { c = ":bc", x = ":bco", l = ":toggle lsp.display-inlay-hints" }
 q = ":quit"
 
 [keys.normal."+"]
@@ -28,3 +32,45 @@ r = ":reload-all"
 x = ":reset-diff-change"
 w = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}"
 d = [":vsplit-new", ":lang diff", ":insert-output git diff"]
+
+
+
+[editor]
+mouse = true
+true-color = true
+completion-replace = true
+trim-trailing-whitespace = true
+end-of-line-diagnostics = "hint"
+color-modes = true
+
+[editor.auto-save]
+focus-lost  = true
+after-delay.enable = true
+after-delay.timeout = 300000
+
+[editor.statusline]
+left = [
+  "mode",
+  "spinner",
+  "version-control",
+  "spacer",
+  "separator",
+  "file-name",
+  "read-only-indicator",
+  "file-modification-indicator",
+
+]
+center = []
+right = [
+  "diagnostics",
+  "workspace-diagnostics",
+  "position",
+  "total-line-numbers",
+  "position-percentage",
+  "file-encoding",
+  "file-line-ending",
+  "file-type",
+  "register",
+  "selections",
+]
+separator = "│"
