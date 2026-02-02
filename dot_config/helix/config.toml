@@ -1,18 +1,17 @@
-theme = "tokyonight"
+theme = "github_dark"
 
 [keys.insert]
 j = { j = "normal_mode"}
 
 [keys.normal]
-d = { d = ["extend_to_line_bounds", "delete_selection"] }
-S = ":write"
+C-s = ":write"
 V = ["extend_to_line_bounds", "select_mode"]
 G = "goto_file_end"
 H = "goto_line_start"
 L = "goto_line_end"
 
 [keys.normal.space]
-e = { c = ":bc", x = ":bco", l = ":toggle lsp.display-inlay-hints" }
+e = {w = ":write", c = ":bc", x = ":bco", l = ":toggle lsp.display-inlay-hints" }
 q = ":quit"
 
 [keys.normal."+"]
@@ -37,11 +36,9 @@ d = [":vsplit-new", ":lang diff", ":insert-output git diff"]
 
 [editor]
 mouse = true
-true-color = true
 completion-replace = true
 trim-trailing-whitespace = true
 end-of-line-diagnostics = "hint"
-color-modes = true
 
 [editor.auto-save]
 focus-lost  = true
