@@ -1,3 +1,7 @@
+# common config (chezmoi managed)
+source "$HOME/.config/.zsh/common.zsh"
+
+
 fpath+=(/Users/nozomeme/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
@@ -30,13 +34,6 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
-# aliases
-alias g='git'
-alias ls='eza'
-alias ll='ls -l'
-alias cat='bat'
-alias gl='g log --oneline'
-alias cz='chezmoi'
 
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
