@@ -1,4 +1,4 @@
-some dotfiles managed by [chezmoi](https://github.com/twpayne/chezmoi)
+Some dotfiles managed by [chezmoi](https://github.com/twpayne/chezmoi)
 
 
 ## Setup
