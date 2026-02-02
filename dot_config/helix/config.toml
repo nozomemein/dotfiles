@@ -1,1 +1,30 @@
 theme = "carbon"
+
+[keys.insert]
+j = { j = "normal_mode"}
+
+[keys.normal]
+d = { d = ["extend_to_line_bounds", "delete_selection"] }
+V = ["extend_to_line_bounds", "select_mode"]
+
+[keys.normal.space]
+e = { w = ":write", c = ":bc", x = ":bco", l = ":toggle lsp.display-inlay-hints" }
+q = ":quit"
+
+[keys.normal."+"]
+f = ":format"
+w = ":toggle whitespace.render all"
+W = ":set whitespace.render none"
+s = ":toggle soft-wrap.enable"
+
+[keys.normal.space.f]
+f = "file_picker_in_current_directory"
+F = "file_picker"
+b = "file_picker_in_current_buffer_directory"
+"." = ":toggle-option file-picker.git-ignore"
+g = "global_search"
+e = "file_explorer"
+r = ":reload-all"
+x = ":reset-diff-change"
+w = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}"
+d = [":vsplit-new", ":lang diff", ":insert-output git diff"]
