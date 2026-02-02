@@ -6,11 +6,13 @@ some dotfiles managed by [chezmoi](https://github.com/twpayne/chezmoi)
 ### 1. Install chezmoi
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)"
+brew install chezmoi
 ```
 
-### 2. Apply dotfiles
+### 2. Init dotfiles
 
 ```bash
 chezmoi init https://github.com/nozomemein/dotfiles.git
 ```
+
+NOTE: Only support macOS (for now)
