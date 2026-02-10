@@ -1,0 +1,8 @@
+theme = Aura
+font-family = Fira Code
+font-style = Regular
+font-size = 14
+font-thicken = true
+font-feature = -dlid
+background-opacity = 0.8
+
