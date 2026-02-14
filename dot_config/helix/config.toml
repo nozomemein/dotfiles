@@ -42,6 +42,8 @@ mouse = true
 completion-replace = true
 trim-trailing-whitespace = true
 end-of-line-diagnostics = "hint"
+default-yank-register = "+"
+clipboard-provider = "pasteboard"
 
 [editor.auto-save]
 focus-lost  = true
