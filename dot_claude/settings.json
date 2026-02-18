@@ -19,8 +19,7 @@
       "Bash(gh pr close *)",
       "Bash(curl * | sh)",
       "Bash(curl * | bash)",
-      "Bash(wget * | sh)",
-      "Bash(:(){ :|:& };:)"
+      "Bash(wget * | sh)"
     ]
   },
   "hooks": {
@@ -57,5 +56,6 @@
   "language": "Japanese",
   "feedbackSurveyState": {
     "lastShownTime": 1753999678646
-  }
+  },
+  "skipDangerousModePermissionPrompt": true
 }
