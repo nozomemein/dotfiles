@@ -34,3 +34,9 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # asdf
 export ASDF_DATA_DIR="$HOME/.asdf"
 path_prepend "$ASDF_DATA_DIR/shims"
+
+# cargo
+path_prepend "$HOME/.cargo/bin"
+
+# java
+path_prepend "$(brew --prefix)/opt/openjdk/bin"
