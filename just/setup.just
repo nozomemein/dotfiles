@@ -1,5 +1,9 @@
 # Run all setup tasks
-all: rust bun node claude-code codex
+all: rust bun node claude-code codex brew-install
+
+# Install packages from Brewfile
+brew-install:
+    just brew apply
 
 # Install Rust via rustup
 rust:
