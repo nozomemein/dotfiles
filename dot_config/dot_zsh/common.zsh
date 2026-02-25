@@ -13,8 +13,10 @@ alias g='git'
 alias ls='eza'
 alias ll='ls -l'
 alias gl='g log --oneline'
+alias gss='g status -sb'
 alias cz='chezmoi'
 alias cat='bat'
+alias ccdang="claude --dangerously-skip-permissions"
 
 # pure
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
