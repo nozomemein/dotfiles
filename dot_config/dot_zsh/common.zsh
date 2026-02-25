@@ -5,6 +5,9 @@ export EDITOR="nvim"
 path_prepend() { [[ -d "$1" ]] && path=("$1" $path); }
 path_append()  { [[ -d "$1" ]] && path+=("$1"); }
 
+# homebrew
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # zsh's path array: unique
 typeset -U path PATH
 
