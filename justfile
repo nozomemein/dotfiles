@@ -20,25 +20,6 @@ apply:
 # Show diff between source and destination
 diff:
     chezmoi diff
-
-# Add a file to chezmoi
-add path:
-    chezmoi add {{ path }}
-
-# Edit and apply a managed file
-edit path:
-    chezmoi edit --apply {{ path }}
-
 # Pull latest and apply
 update:
     chezmoi update
-
-# Git status of dotfiles repo
-status:
-    chezmoi git -- status
-
-# Commit and push dotfiles
-push message:
-    chezmoi git -- add -A
-    chezmoi git -- commit -m "{{ message }}"
-    chezmoi git -- push
