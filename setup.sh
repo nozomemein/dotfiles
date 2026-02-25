@@ -16,12 +16,12 @@ fi
 command -v chezmoi &>/dev/null || brew install chezmoi
 command -v just &>/dev/null || brew install just
 
-# Init and apply dotfiles
-echo "==> Applying dotfiles..."
-chezmoi init --apply --source "$PWD"
-
 # Install dev tools
 echo "==> Installing dev tools..."
 just setup all
+
+# Apply dotfiles
+echo "==> Applying dotfiles..."
+chezmoi apply
 
 echo "==> Done!"

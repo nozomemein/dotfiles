@@ -2,11 +2,9 @@ Dotfiles managed by [chezmoi](https://github.com/twpayne/chezmoi). macOS only.
 
 ## Setup
 
-Installs Homebrew, chezmoi, just, dotfiles, and dev tools.
-
 ```bash
-git clone https://github.com/nozomemein/dotfiles.git
-cd dotfiles
+git clone https://github.com/nozomemein/dotfiles.git ~/.local/share/chezmoi
+cd ~/.local/share/chezmoi
 sh setup.sh
 ```
 
