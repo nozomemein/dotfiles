@@ -1,18 +1,5 @@
 # Run all setup tasks
-all: homebrew rust bun node claude-code codex
-
-# Install Homebrew (macOS only)
-homebrew:
-    #!/usr/bin/env zsh
-    if command -v brew &>/dev/null; then
-        echo "homebrew: $(brew --version | head -1)"
-    else
-        if [[ "$(uname)" != "Darwin" ]]; then
-            echo "Skipping: Homebrew setup is macOS only"
-            exit 0
-        fi
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
+all: rust bun node claude-code codex
 
 # Install Rust via rustup
 rust:

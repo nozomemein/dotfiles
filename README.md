@@ -1,18 +1,41 @@
-Some dotfiles managed by [chezmoi](https://github.com/twpayne/chezmoi)
-
+Dotfiles managed by [chezmoi](https://github.com/twpayne/chezmoi). macOS only.
 
 ## Setup
 
-### 1. Install chezmoi
+Installs Homebrew, chezmoi, just, dotfiles, and dev tools.
 
 ```bash
-brew install chezmoi
+git clone https://github.com/nozomemein/dotfiles.git
+cd dotfiles
+sh setup.sh
 ```
 
-### 2. Init dotfiles
+## Commands
 
-```bash
-chezmoi init https://github.com/nozomemein/dotfiles.git
+```
+just                   # List all commands
+just apply             # Apply chezmoi to home directory
+just diff              # Show diff between source and destination
+just update            # Pull latest and apply
 ```
 
-NOTE: Only support macOS (for now)
+### brew
+
+```
+just brew add minio          # Add brew package to Brewfile
+just brew add cask firefox   # Add cask to Brewfile
+just brew remove minio       # Remove package from Brewfile
+just brew diff               # Show diff between installed and Brewfile
+just brew apply              # Install from Brewfile and remove extras
+```
+
+### setup
+
+```
+just setup all          # Install all dev tools
+just setup rust         # Rust via rustup
+just setup bun          # Bun
+just setup node         # Node.js via asdf
+just setup claude-code  # Claude Code
+just setup codex        # OpenAI Codex
+```
