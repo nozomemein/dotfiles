@@ -15,3 +15,8 @@ alias ll='ls -l'
 alias gl='g log --oneline'
 alias cz='chezmoi'
 alias cat='bat'
+
+# pure
+fpath+=("$(brew --prefix)/share/zsh/site-functions")
+autoload -U promptinit; promptinit
+prompt pure
