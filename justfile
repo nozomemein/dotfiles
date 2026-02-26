@@ -1,6 +1,7 @@
 # chezmoi dotfiles management
 
 mod brew 'just/brew.just'
+mod git 'just/git.just'
 mod setup 'just/setup.just'
 
 # List available recipes

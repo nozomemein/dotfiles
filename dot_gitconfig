@@ -1,0 +1,5 @@
+# Shared aliases (managed by chezmoi)
+# Local config: user, signingkey, etc. (not managed by chezmoi)
+[include]
+	path = ~/.config/git/alias.conf
+	path = ~/.gitconfig.local
