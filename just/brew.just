@@ -39,9 +39,9 @@ diff:
     echo "=== Extra (installed but not in Brewfile) ==="
     brew bundle cleanup --global 2>&1 || true
 
-# Install packages from Brewfile and remove extras
+# Install packages from Brewfile
 apply:
-    brew bundle --global --cleanup
+    brew bundle --global
 
 # Clean up extra packages
 clean:
