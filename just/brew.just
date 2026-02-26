@@ -42,3 +42,7 @@ diff:
 # Install packages from Brewfile and remove extras
 apply:
     brew bundle --global --cleanup
+
+# Clean up extra packages
+clean:
+    brew bundle cleanup --global --force
