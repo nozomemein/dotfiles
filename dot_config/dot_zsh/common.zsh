@@ -36,6 +36,9 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # syntax highlighting
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# rbenv
+eval "$(rbenv init - zsh)"
+
 # asdf
 export ASDF_DATA_DIR="$HOME/.asdf"
 path_prepend "$ASDF_DATA_DIR/shims"
