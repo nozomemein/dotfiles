@@ -7,8 +7,11 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "git_panel": {
+    "tree_view": true
+  },
   "buffer_font_family": "Fira Code",
-  "icon_theme": "Zed (Default)",
+  "icon_theme": "Bearded Icon Theme",
   "agent": {
     "default_model": {
       "provider": "copilot_chat",
@@ -18,8 +21,12 @@
   "vim_mode": false,
   "theme": "Cursor Dark",
   "buffer_font_size": 14,
-  "autosave": "on_focus_change",
-  "format_on_save": "on",
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  },
+  "format_on_save": "off",
   "formatter": "language_server",
   "inlay_hints": {
     "enabled": true,
