@@ -170,6 +170,16 @@ map("n", "<leader>zz", ":ZenMode<CR>", { desc = "ZenMode" })
 -- Paste without yanking in visual mode
 map("x", "p", '"_dP', { desc = "Paste without yanking", silent = true })
 
+-- Bookmarks
+-- NOTE: In BookmarksGoto telescope picker, <C-d> deletes the selected bookmark
+map("n", "mm", "<cmd>BookmarksMark<CR>", { desc = "Toggle bookmark" })
+map("n", "mo", "<cmd>BookmarksGoto<CR>", { desc = "Go to bookmark" })
+map("n", "ma", "<cmd>BookmarksCommands<CR>", { desc = "Bookmark commands" })
+map("n", "mn", "<cmd>BookmarksGotoNext<CR>", { desc = "Next bookmark" })
+map("n", "mp", "<cmd>BookmarksGotoPrev<CR>", { desc = "Prev bookmark" })
+map("n", "ml", "<cmd>BookmarksLists<CR>", { desc = "Bookmark lists" })
+map("n", "mt", "<cmd>BookmarksTree<CR>", { desc = "Bookmark tree view" })
+
 -- LeetCode
 map("n", "<leader>lm", ":Leet<CR>", { desc = "[LeetCode] Menu" })
 map("n", "<leader>lt", ":Leet tabs<CR>", { desc = "[LeetCode] Tabs" })

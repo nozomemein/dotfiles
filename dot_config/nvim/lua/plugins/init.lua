@@ -139,4 +139,16 @@ return {
     "qnighy/lalrpop.vim",
     lazy = false,
   },
+  {
+    "LintaoAmons/bookmarks.nvim",
+    tag = "3.2.0",
+    lazy = false,
+    dependencies = {
+      { "kkharji/sqlite.lua" },
+      { "nvim-telescope/telescope.nvim" },
+    },
+    config = function()
+      require("bookmarks").setup()
+    end,
+  },
 }
