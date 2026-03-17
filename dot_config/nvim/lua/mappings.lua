@@ -174,7 +174,7 @@ map("x", "p", '"_dP', { desc = "Paste without yanking", silent = true })
 -- NOTE: In BookmarksGoto telescope picker, <C-d> deletes the selected bookmark
 map("n", "mm", "<cmd>BookmarksMark<CR>", { desc = "Toggle bookmark" })
 map("n", "mo", "<cmd>BookmarksGoto<CR>", { desc = "Go to bookmark" })
-map("n", "ma", "<cmd>BookmarksCommands<CR>", { desc = "Bookmark commands" })
+map("n", "mc", "<cmd>BookmarksCommands<CR>", { desc = "Bookmark commands" })
 map("n", "mn", "<cmd>BookmarksGotoNext<CR>", { desc = "Next bookmark" })
 map("n", "mp", "<cmd>BookmarksGotoPrev<CR>", { desc = "Prev bookmark" })
 map("n", "ml", "<cmd>BookmarksLists<CR>", { desc = "Bookmark lists" })
