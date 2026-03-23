@@ -1,8 +1,9 @@
 theme = Aura
 font-family = Fira Code
+font-family = BIZ UDGothic
 font-style = Regular
 font-size = 14
 font-thicken = true
-font-feature = -dlid
+font-feature = -dlig
 background-opacity = 0.8
 
