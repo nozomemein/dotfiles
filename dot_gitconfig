@@ -2,4 +2,5 @@
 # Local config: user, signingkey, etc. (not managed by chezmoi)
 [include]
 	path = ~/.config/git/alias.conf
+	path = ~/.config/git/delta.conf
 	path = ~/.gitconfig.local
