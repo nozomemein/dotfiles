@@ -57,7 +57,8 @@
     "commit-commands@claude-plugins-official": true,
     "atlassian@claude-plugins-official": true,
     "github@claude-plugins-official": true,
-    "codex@openai-codex": true
+    "codex@openai-codex": false,
+    "frontend-design@claude-plugins-official": true
   },
   "language": "Japanese",
   "effortLevel": "high",
