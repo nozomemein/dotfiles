@@ -8,52 +8,117 @@ description: |
 
 # Codex
 
-Codex CLIを使用してコードレビュー・分析を実行するスキル。
+Codex CLI を使用してコードレビュー・分析・相談を実行するスキル。
 
-## 実行コマンド
+## 実行コマンド（推奨パターン: ファイル経由 stdin）
 
-codex exec --full-auto --sandbox read-only --cd <project_directory> "<request>"
+prompt は **必ずファイルに書いて stdin で渡す**。インライン引数 `"..."` は backtick / `$(...)` を shell が command substitution として実行してしまい壊れる（`eval: command not found: try_into` 等）。
+
+```bash
+# 1. プロンプトをファイルに書く（'EOF' で literal 化、変数展開・backtick 解釈を無効化）
+cat > /tmp/codex-prompt.txt <<'EOF'
+<プロンプト本文。backtick やダブルクォートを自由に含められる>
+
+確認や質問は不要です。具体的な提案・修正案・コード例まで自主的に出力してください。
+EOF
+
+# 2. codex 実行（- で stdin から prompt を読む）
+codex exec --full-auto --sandbox read-only -m gpt-5.5 --cd <project_dir> - < /tmp/codex-prompt.txt
+```
 
 ## プロンプトのルール
 
-**重要**: codexに渡すリクエストには、以下の指示を必ず含めること：
+prompt の末尾に必ず以下を含める:
 
 > 「確認や質問は不要です。具体的な提案・修正案・コード例まで自主的に出力してください。」
 
 ## パラメータ
 
 | パラメータ | 説明 |
-|-----------|------|
-| `--full-auto` | 完全自動モードで実行 |
-| `--sandbox read-only` | 読み取り専用サンドボックス（安全な分析用） |
+|---|---|
+| `--full-auto` | 完全自動モード |
+| `--sandbox read-only` | 読み取り専用 sandbox（安全な分析用） |
+| `-m gpt-5.5` | モデル指定（必須、ユーザ既定） |
 | `--cd <dir>` | 対象プロジェクトのディレクトリ |
-| `"<request>"` | 依頼内容（日本語可） |
+| `-` | stdin から prompt を読む |
 
-## 使用例
-
-**注意**: 各例では末尾に「確認不要、具体的な提案まで出力」の指示を含めている。
+## 使用例（すべて file-based）
 
 ### コードレビュー
-codex exec --full-auto --sandbox read-only --cd /path/to/project "このプロジェクトのコードをレビューして、改善点を指摘してください。確認や質問は不要です。具体的な修正案とコード例まで自主的に出力してください。"
+```bash
+cat > /tmp/codex-prompt.txt <<'EOF'
+このプロジェクトのコードをレビューして、改善点を指摘してください。
+確認や質問は不要です。具体的な修正案とコード例まで自主的に出力してください。
+EOF
+codex exec --full-auto --sandbox read-only -m gpt-5.5 --cd /path/to/project - < /tmp/codex-prompt.txt
+```
 
 ### バグ調査
-codex exec --full-auto --sandbox read-only --cd /path/to/project "認証処理でエラーが発生する原因を調査してください。確認や質問は不要です。原因の特定と具体的な修正案まで自主的に出力してください。"
+```bash
+cat > /tmp/codex-prompt.txt <<'EOF'
+認証処理でエラーが発生する原因を調査してください。
+確認や質問は不要です。原因の特定と具体的な修正案まで自主的に出力してください。
+EOF
+codex exec --full-auto --sandbox read-only -m gpt-5.5 --cd /path/to/project - < /tmp/codex-prompt.txt
+```
 
 ### アーキテクチャ分析
-codex exec --full-auto --sandbox read-only --cd /path/to/project "このプロジェクトのアーキテクチャを分析して説明してください。確認や質問は不要です。改善提案まで自主的に出力してください。"
+```bash
+cat > /tmp/codex-prompt.txt <<'EOF'
+このプロジェクトのアーキテクチャを分析して説明してください。
+確認や質問は不要です。改善提案まで自主的に出力してください。
+EOF
+codex exec --full-auto --sandbox read-only -m gpt-5.5 --cd /path/to/project - < /tmp/codex-prompt.txt
+```
 
 ### リファクタリング提案
-codex exec --full-auto --sandbox read-only --cd /path/to/project "技術的負債を特定し、リファクタリング計画を提案してください。確認や質問は不要です。具体的なコード例まで自主的に出力してください。"
+```bash
+cat > /tmp/codex-prompt.txt <<'EOF'
+技術的負債を特定し、リファクタリング計画を提案してください。
+確認や質問は不要です。具体的なコード例まで自主的に出力してください。
+EOF
+codex exec --full-auto --sandbox read-only -m gpt-5.5 --cd /path/to/project - < /tmp/codex-prompt.txt
+```
 
 ### デザイン相談（UI/UX）
-codex exec --full-auto --sandbox read-only --cd /path/to/project "あなたは世界トップクラスのUIデザイナーです。以下の観点からこのプロジェクトのUIを評価してください: (1) 視覚的階層構造とタイポグラフィ、(2) 余白・スペーシングのリズム、(3) カラーパレットのコントラストとアクセシビリティ、(4) インタラクションパターンの一貫性、(5) ユーザーの認知負荷の軽減。確認や質問は不要です。具体的な改善案をコード例付きで提示してください。"
+```bash
+cat > /tmp/codex-prompt.txt <<'EOF'
+あなたは世界トップクラスの UI デザイナーです。以下の観点からこのプロジェクトの UI を評価してください:
+(1) 視覚的階層構造とタイポグラフィ
+(2) 余白・スペーシングのリズム
+(3) カラーパレットのコントラストとアクセシビリティ
+(4) インタラクションパターンの一貫性
+(5) ユーザーの認知負荷の軽減
 
-codex exec --full-auto --sandbox read-only --cd /path/to/project "UXリサーチャー兼デザイナーとして、このフォームのユーザビリティを分析してください。Nielsen の10ヒューリスティクスに基づき、(1) エラー防止の仕組み、(2) ユーザーの制御と自由度、(3) 一貫性と標準、(4) 認識vs記憶の負荷、(5) 柔軟性と効率性を評価してください。確認や質問は不要です。改善したTailwind CSSコードまで自主的に提示してください。"
+確認や質問は不要です。具体的な改善案をコード例付きで提示してください。
+EOF
+codex exec --full-auto --sandbox read-only -m gpt-5.5 --cd /path/to/project - < /tmp/codex-prompt.txt
+```
+
+## トラブルシューティング
+
+### `eval: command not found` / shell が prompt 内を実行してしまう
+- 原因: インライン引数 `"<prompt>"` で渡した prompt 内の **backtick** や **`$(...)`** を shell が command substitution として実行
+- 対処: 必ず **ファイル経由 stdin** パターン（上記）を使う。インライン引数はそもそも使わない
+
+### `Reading additional input from stdin...` のままストールする
+- 原因: Codex CLI は full-auto でも対話 stdin を開けっぱなしにすることがある
+- 対処:
+  - ファイル経由 stdin パターン（`- < /tmp/codex-prompt.txt`）なら EOF で自動的に閉じるので発生しない
+  - 引数 prompt を使う場合は `< /dev/null` を必ず付ける
+  - 5 分以上 output 行数が増えなければ kill して prompt を短くして再実行
+  - `-m gpt-5.5` を必ず付ける（ユーザ既定モデル）
+
+### sandbox 制限で `cargo check` 等が失敗
+- `CARGO_TARGET_DIR=/tmp/codex-target` を環境変数で渡せば共有 target 外で動く
+
+### `target-codex/` 等の cargo cache が untracked で残る
+- worktree 完了時に消えるので **触らない**。`.gitignore` に追記しない、commit にも含めない
 
 ## 実行手順
 
 1. ユーザーから依頼内容を受け取る
-2. 対象プロジェクトのディレクトリを特定する（現在のワーキングディレクトリまたはユーザー指定）
-3. **プロンプトを作成する際、末尾に「確認や質問は不要です。具体的な提案まで自主的に出力してください。」を必ず追加する**
-4. 上記コマンド形式でCodexを実行
+2. 対象プロジェクトのディレクトリを特定する（cwd またはユーザー指定）
+3. prompt を `/tmp/codex-prompt.txt` に heredoc で書き出す（末尾に「確認や質問は不要です…」を必ず追加）
+4. `codex exec --full-auto --sandbox read-only -m gpt-5.5 --cd <dir> - < /tmp/codex-prompt.txt` で実行
 5. 結果をユーザーに報告
