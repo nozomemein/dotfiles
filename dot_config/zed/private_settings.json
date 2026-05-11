@@ -11,7 +11,11 @@
     "tree_view": true
   },
   "buffer_font_family": "Fira Code",
-  "icon_theme": "Bearded Icon Theme",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Bearded Icon Theme",
+    "dark": "Bearded Icon Theme"
+  },
   "agent": {
     "default_model": {
       "provider": "copilot_chat",
@@ -19,7 +23,11 @@
     },
   },
   "vim_mode": false,
-  "theme": "Cursor Dark",
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Catppuccin Frappé"
+  },
   "buffer_font_size": 14,
   "autosave": {
     "after_delay": {

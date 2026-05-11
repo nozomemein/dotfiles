@@ -1,0 +1,14 @@
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-shift-m": [
+        "action::Sequence",
+        [
+          "markdown::OpenPreviewToTheSide",
+          "workspace::ActivatePaneRight"
+        ]
+      ]
+    }
+  }
+]
