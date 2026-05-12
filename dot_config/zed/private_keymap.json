@@ -52,6 +52,7 @@
       "space f b": "tab_switcher::Toggle",
       "space f z": "buffer_search::Deploy",
       "space f m": "editor::Format",
+      "space f p": ["projects::OpenRecent", { "create_new_window": false }],
 
       // comment
       "space /": "editor::ToggleComments",
