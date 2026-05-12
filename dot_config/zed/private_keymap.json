@@ -69,7 +69,14 @@
       "space b": "workspace::NewFile",
 
       // toggles
-      "space n": "editor::ToggleLineNumbers"
+      "space n": "editor::ToggleLineNumbers",
+
+      // bookmarks (built-in)
+      "space m m": "editor::ToggleBookmark",
+      "space m n": "editor::GoToNextBookmark",
+      "space m p": "editor::GoToPreviousBookmark",
+      "space m l": "editor::ViewBookmarks",
+      "space m c": "workspace::ClearBookmarks"
     }
   },
 
