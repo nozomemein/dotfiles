@@ -4,11 +4,80 @@
     "bindings": {
       "cmd-shift-m": [
         "action::Sequence",
-        [
-          "markdown::OpenPreviewToTheSide",
-          "workspace::ActivatePaneRight"
-        ]
+        ["markdown::OpenPreviewToTheSide", "workspace::ActivatePaneRight"]
       ]
+    }
+  },
+
+  // ─── insert mode: jj → ESC (NvChad local) ──────────────────────────────
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      "j j": "vim::NormalBefore"
+    }
+  },
+
+  // ─── normal mode: NvChad-style leader (space) + Ctrl bindings ──────────
+  {
+    "context": "vim_mode == normal && vim_operator == none && !VimWaiting",
+    "bindings": {
+      // window navigation
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+
+      // file ops
+      "ctrl-s": "workspace::Save",
+
+      // buffer (tab) nav
+      "tab": "pane::ActivateNextItem",
+      "shift-tab": "pane::ActivatePrevItem",
+
+      // splits (local: | vsplit / \ hsplit)
+      "|": "pane::SplitRight",
+      "\\": "pane::SplitDown",
+
+      // line start / end (local: S-h / S-l)
+      "shift-h": "vim::FirstNonWhitespace",
+      "shift-l": "vim::EndOfLine",
+
+      // project panel (NvimTree)
+      "ctrl-n": "project_panel::ToggleFocus",
+
+      // ── leader (space) bindings ─────────────────────────────────────
+      // telescope-ish finders
+      "space f f": "file_finder::Toggle",
+      "space f w": "workspace::NewSearch",
+      "space f b": "tab_switcher::Toggle",
+      "space f z": "buffer_search::Deploy",
+      "space f m": "editor::Format",
+
+      // comment
+      "space /": "editor::ToggleComments",
+
+      // LSP
+      "space c a": "editor::ToggleCodeActions",
+      "space d s": "diagnostics::Deploy",
+
+      // project / buffers
+      "space e": "project_panel::ToggleFocus",
+      "space x": "pane::CloseActiveItem",
+      "space q": "pane::CloseActiveItem",
+      "space shift-q": "workspace::CloseWindow",
+      "space b": "workspace::NewFile",
+
+      // toggles
+      "space n": "editor::ToggleLineNumbers"
+    }
+  },
+
+  // ─── visual mode: leader (space) bindings ──────────────────────────────
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "space /": "editor::ToggleComments",
+      "space f m": "editor::Format"
     }
   }
 ]

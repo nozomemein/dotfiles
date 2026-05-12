@@ -16,13 +16,14 @@
     "light": "Bearded Icon Theme",
     "dark": "Bearded Icon Theme"
   },
+  "disable_ai": true,
   "agent": {
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-4o"
     },
   },
-  "vim_mode": false,
+  "vim_mode": true,
   "theme": {
     "mode": "dark",
     "light": "One Light",
