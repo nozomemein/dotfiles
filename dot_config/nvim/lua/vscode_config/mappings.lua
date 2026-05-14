@@ -20,6 +20,11 @@ end
 -- ─── insert mode: jj → ESC ───────────────────────────────────────────
 map("i", "jj", "<ESC>", opts)
 
+-- ─── line start / end (NvChad local: S-h / S-l) ─────────────────────
+-- overrides vim default H/L (top/bottom of viewport)
+map({ "n", "v" }, "<S-h>", "^", opts)
+map({ "n", "v" }, "<S-l>", "$", opts)
+
 -- ─── save / buffer (tab) nav ─────────────────────────────────────────
 map("n", "<C-s>", act "workbench.action.files.save", opts)
 map("n", "<tab>", act "workbench.action.nextEditor", opts)

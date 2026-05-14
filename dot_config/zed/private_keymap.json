@@ -33,6 +33,8 @@
       // buffer (tab) nav
       "tab": "pane::ActivateNextItem",
       "shift-tab": "pane::ActivatePreviousItem",
+      "] b": "pane::ActivateNextItem",
+      "[ b": "pane::ActivatePreviousItem",
 
       // splits (local: | vsplit / \ hsplit)
       "|": "pane::SplitRight",
