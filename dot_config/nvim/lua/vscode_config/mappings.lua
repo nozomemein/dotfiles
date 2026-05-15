@@ -18,7 +18,9 @@ local function act(action)
 end
 
 -- ─── insert mode: jj → ESC ───────────────────────────────────────────
-map("i", "jj", "<ESC>", opts)
+-- VSCode Neovim handles insert-mode keys in VSCode (not Neovim) for perf,
+-- so this is configured via `vscode-neovim.compositeKeys` in settings.json.
+-- TODO: bring vscode settings.json under chezmoi management so this lives with the rest of the dotfiles.
 
 -- ─── line start / end (NvChad local: S-h / S-l) ─────────────────────
 -- overrides vim default H/L (top/bottom of viewport)
