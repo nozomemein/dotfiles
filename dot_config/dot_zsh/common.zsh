@@ -51,3 +51,6 @@ path_prepend "$(brew --prefix)/opt/openjdk/bin"
 
 # claude
 path_prepend "$HOME/.local/bin"
+
+# zoxide
+eval "$(zoxide init zsh)"
