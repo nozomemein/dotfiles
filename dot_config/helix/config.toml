@@ -11,6 +11,8 @@ V = ["extend_to_line_bounds", "select_mode"]
 G = "goto_file_end"
 H = "goto_line_start"
 L = "goto_line_end"
+"|" = "vsplit"
+"\\" = "hsplit"
 
 [keys.normal.space]
 e = {w = ":write", c = ":bc", x = ":bco", l = ":toggle lsp.display-inlay-hints" }
@@ -21,6 +23,16 @@ f = ":format"
 w = ":toggle whitespace.render all"
 W = ":set whitespace.render none"
 s = ":toggle soft-wrap.enable"
+
+[keys.normal."["]
+b = "goto_previous_buffer"
+
+[keys.normal."]"]
+b = "goto_next_buffer"
+
+[keys.normal."C-w"]
+"|" = "vsplit"
+"/" = "hsplit"
 
 [keys.normal.space.f]
 f = "file_picker_in_current_directory"
@@ -44,6 +56,8 @@ trim-trailing-whitespace = true
 end-of-line-diagnostics = "hint"
 default-yank-register = "+"
 clipboard-provider = "pasteboard"
+bufferline = "multiple"
+true-color = true
 
 [editor.auto-save]
 focus-lost  = true
@@ -60,7 +74,6 @@ left = [
   "file-name",
   "read-only-indicator",
   "file-modification-indicator",
-
 ]
 center = []
 right = [
