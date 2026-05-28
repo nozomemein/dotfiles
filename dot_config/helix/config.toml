@@ -17,6 +17,7 @@ L = "goto_line_end"
 [keys.normal.space]
 e = {w = ":write", c = ":bc", x = ":bco", l = ":toggle lsp.display-inlay-hints" }
 q = ":quit"
+r = ":reload-all"
 
 [keys.normal."+"]
 f = ":format"
@@ -58,6 +59,10 @@ default-yank-register = "+"
 clipboard-provider = "pasteboard"
 bufferline = "multiple"
 true-color = true
+
+[editor.cursor-shape]
+insert = "bar"
+select = "underline"
 
 [editor.auto-save]
 focus-lost  = true
