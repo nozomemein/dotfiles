@@ -20,11 +20,11 @@ function = "function"
 "function.macro" = "constant"
 "function.special" = "constant"
 
-constructor = "class"
+constructor = "type"
 namespace = "namespace"
 
 type = "type"
-"type.builtin" = "type_builtin"
+"type.builtin" = "type"
 "type.enum.variant" = "constant"
 
 variable = "variable"
