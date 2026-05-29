@@ -63,6 +63,10 @@ true-color = true
 insert = "bar"
 select = "underline"
 
+[editor.soft-wrap]
+enable = true
+wrap-indicator = "↪ "
+
 [editor.auto-save]
 focus-lost  = true
 after-delay.enable = true
