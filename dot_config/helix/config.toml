@@ -1,4 +1,4 @@
-theme = "poimandres"
+theme = "anysphere"
 
 [keys.insert]
 j = { j = "normal_mode"}

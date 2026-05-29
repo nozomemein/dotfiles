@@ -1,0 +1,207 @@
+inherits = "github_dark"
+
+# === syntax ===
+attribute = "attribute"
+
+keyword = "keyword"
+"keyword.control" = "keyword"
+"keyword.operator" = "operator"
+"keyword.directive" = "keyword_directive"
+"keyword.storage" = "storage"
+
+operator = "operator"
+punctuation = "punctuation"
+"punctuation.delimiter" = "punctuation"
+"punctuation.bracket" = "punctuation"
+"punctuation.special" = "punctuation_subtle"
+
+function = "function"
+"function.method" = "function"
+"function.macro" = "constant"
+"function.special" = "constant"
+
+constructor = "class"
+namespace = "namespace"
+
+type = "type"
+"type.builtin" = "type_builtin"
+"type.enum.variant" = "constant"
+
+variable = "variable"
+"variable.other" = "variable"
+"variable.other.member" = "member"
+"variable.parameter" = "variable"
+"variable.builtin" = "variable_builtin"
+
+constant = "constant"
+"constant.numeric" = "number"
+"constant.numeric.integer" = "number"
+"constant.numeric.float" = "number"
+"constant.character" = "punctuation"
+"constant.character.escape" = "punctuation"
+"constant.builtin" = "constant_builtin"
+"constant.builtin.boolean" = "constant_builtin"
+
+string = "string"
+"string.regexp" = "regexp"
+"string.special" = "string"
+"string.special.path" = "string"
+"string.special.symbol" = "variable"
+
+comment = { fg = "comment" }
+"comment.line" = { fg = "comment" }
+"comment.block" = { fg = "comment" }
+"comment.block.documentation" = { fg = "comment" }
+
+tag = "tag"
+"tag.attribute" = "attribute"
+"tag.builtin" = "tag_special"
+
+label = "label"
+special = "constant"
+
+# === markup ===
+"markup.heading" = { fg = "fg", modifiers = ["bold"] }
+"markup.heading.1" = { fg = "fg", modifiers = ["bold"] }
+"markup.heading.2" = { fg = "fg", modifiers = ["bold"] }
+"markup.heading.3" = { fg = "fg", modifiers = ["bold"] }
+"markup.heading.4" = { fg = "fg", modifiers = ["bold"] }
+"markup.heading.5" = { fg = "fg", modifiers = ["bold"] }
+"markup.heading.6" = { fg = "fg", modifiers = ["bold"] }
+"markup.bold" = { fg = "yellow", modifiers = ["bold"] }
+"markup.italic" = { fg = "keyword" }
+"markup.strikethrough" = { modifiers = ["crossed_out"] }
+"markup.link.url" = { fg = "keyword", modifiers = ["underlined"] }
+"markup.link.text" = { fg = "keyword", modifiers = ["underlined"] }
+"markup.link.label" = { fg = "constant", modifiers = ["underlined"] }
+"markup.list" = "fg"
+"markup.list.numbered" = "fg"
+"markup.list.unnumbered" = "fg"
+"markup.quote" = "comment"
+"markup.raw" = "string"
+"markup.raw.inline" = "string"
+"markup.raw.block" = "string"
+
+# === diff ===
+"diff.plus" = "diff_plus"
+"diff.minus" = "diff_minus"
+"diff.delta" = "diff_delta"
+
+# === ui ===
+"ui.background" = { bg = "bg" }
+"ui.background.separator" = { fg = "border" }
+"ui.text" = { fg = "fg" }
+"ui.text.focus" = { fg = "fg" }
+"ui.text.inactive" = { fg = "inactive" }
+"ui.text.directory" = { fg = "info_blue" }
+
+"ui.cursor" = { fg = "bg", bg = "fg" }
+"ui.cursor.primary" = { fg = "bg", bg = "fg" }
+"ui.cursor.match" = { bg = "selection_overlay" }
+"ui.cursorline.primary" = { bg = "cursorline" }
+
+"ui.selection" = { bg = "selection_inactive" }
+"ui.selection.primary" = { bg = "selection" }
+
+"ui.linenr" = { fg = "line_nr" }
+"ui.linenr.selected" = { fg = "line_nr_selected" }
+"ui.gutter" = { bg = "bg" }
+"ui.gutter.selected" = { bg = "bg" }
+
+"ui.virtual" = { fg = "dim" }
+"ui.virtual.ruler" = { bg = "ruler" }
+"ui.virtual.indent-guide" = { fg = "indent_guide" }
+"ui.virtual.whitespace" = { fg = "whitespace" }
+"ui.virtual.inlay-hint" = { fg = "inlay_fg", bg = "inlay_bg" }
+"ui.virtual.jump-label" = { fg = "keyword_directive", modifiers = ["bold"] }
+
+"ui.statusline" = { fg = "fg", bg = "bg" }
+"ui.statusline.active" = { fg = "fg", bg = "bg", underline = { color = "border", style = "line" } }
+"ui.statusline.inactive" = { fg = "inactive", bg = "bg" }
+"ui.statusline.normal" = { fg = "bg", bg = "keyword", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "bg", bg = "function", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "bg", bg = "constant", modifiers = ["bold"] }
+
+"ui.bufferline" = { fg = "fg", bg = "bg_panel" }
+"ui.bufferline.active" = { fg = "fg", bg = "bg" }
+
+"ui.popup" = { fg = "fg", bg = "bg_panel" }
+"ui.popup.info" = { fg = "fg", bg = "bg_widget" }
+"ui.window" = { fg = "border", bg = "bg_panel" }
+"ui.help" = { fg = "fg", bg = "bg_widget" }
+
+"ui.menu" = { fg = "fg", bg = "bg_panel" }
+"ui.menu.selected" = { fg = "fg", bg = "menu_selection" }
+"ui.menu.scroll" = { fg = "dim", bg = "bg_panel" }
+
+# === diagnostic ===
+"diagnostic.error" = { underline = { color = "diagnostic_error", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "diagnostic_warn", style = "curl" } }
+"diagnostic.info" = { underline = { color = "diagnostic_info", style = "curl" } }
+"diagnostic.hint" = { underline = { color = "diagnostic_hint", style = "curl" } }
+"diagnostic.unnecessary" = { modifiers = ["dim"] }
+"diagnostic.deprecated" = { modifiers = ["crossed_out"] }
+
+error = "diagnostic_error"
+warning = "diagnostic_warn"
+info = "diagnostic_info"
+hint = "diagnostic_hint"
+
+[palette]
+bg = "#181818"
+bg_widget = "#1d1d1d"
+bg_panel = "#292929"
+bg_input = "#212121"
+fg = "#d6d6dd"
+fg_soft = "#d1d1d1"
+muted = "#a6a6a6"
+inactive = "#6b6b6b"
+dim = "#737373"
+border = "#383838"
+line_nr = "#535353"
+line_nr_selected = "#c2c2c2"
+cursorline = "#292929"
+selection = "#163761"
+selection_overlay = "#16376170"
+selection_inactive = "#363636"
+menu_selection = "#194176"
+indent_guide = "#383838"
+whitespace = "#737373"
+ruler = "#383838"
+inlay_bg = "#2b2b2b"
+inlay_fg = "#838383"
+
+keyword = "#83d6c5"
+keyword_directive = "#a8cc7c"
+storage = "#82d2ce"
+operator = "#d6d6dd"
+punctuation = "#d6d6dd"
+punctuation_subtle = "#898989"
+function = "#efb080"
+class = "#87c3ff"
+namespace = "#d1d1d1"
+type = "#efb080"
+type_builtin = "#82d2ce"
+variable = "#d6d6dd"
+variable_builtin = "#c1808a"
+member = "#aa9bf5"
+constant = "#aaa0fa"
+constant_builtin = "#82d2ce"
+number = "#ebc88d"
+yellow = "#f8c762"
+string = "#e394dc"
+regexp = "#d6d6dd"
+comment = "#6d6d6d"
+tag = "#87c3ff"
+tag_special = "#af9cff"
+attribute = "#aaa0fa"
+label = "#efb080"
+
+info_blue = "#228df2"
+diff_plus = "#5a964d"
+diff_minus = "#f14c4c"
+diff_delta = "#1981ef"
+diagnostic_error = "#f14c4c"
+diagnostic_warn = "#ea7620"
+diagnostic_info = "#228df2"
+diagnostic_hint = "#83d6c5"
