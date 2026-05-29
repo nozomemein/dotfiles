@@ -54,3 +54,9 @@ path_prepend "$HOME/.local/bin"
 
 # zoxide
 eval "$(zoxide init zsh)"
+
+# conf.d loader
+for _f in "${HOME}/.config/.zsh/conf.d/"*.zsh(N); do
+  source "$_f"
+done
+unset _f
