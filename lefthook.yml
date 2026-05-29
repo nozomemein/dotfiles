@@ -1,0 +1,9 @@
+pre-commit:
+  parallel: true
+  commands:
+    secret-scan:
+      glob: "*"
+      # --validation=false で live API 検証を skip し、pattern match だけで block
+      # ローカル hook 用途では検知だけで十分 (誤検知は .gitleaksignore で許容)
+      run: betterleaks dir {staged_files} --redact --no-banner --validation=false
+      fail_text: "🚫 secret らしき文字列を検知。誤って commit する前に確認してください。誤検知なら .gitleaksignore に追加。"
