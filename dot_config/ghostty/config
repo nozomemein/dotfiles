@@ -4,6 +4,7 @@ font-family = BIZ UDGothic
 font-style = Regular
 font-size = 14
 font-thicken = true
+font-synthetic-style = no-italic,no-bold-italic
 font-feature = -dlig
 background-opacity = 0.8
 
