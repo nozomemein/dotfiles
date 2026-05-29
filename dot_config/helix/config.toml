@@ -40,12 +40,11 @@ f = "file_picker_in_current_directory"
 F = "file_picker"
 b = "file_picker_in_current_buffer_directory"
 "." = ":toggle-option file-picker.git-ignore"
-g = "global_search"
+w = "global_search"
 e = "file_explorer"
 r = ":reload-all"
 c = ":config-reload"
 x = ":reset-diff-change"
-w = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}"
 d = [":vsplit-new", ":lang diff", ":insert-output git diff"]
 
 
