@@ -25,7 +25,7 @@ namespace = "namespace"
 
 type = "type"
 "type.builtin" = "type"
-"type.enum.variant" = "constant"
+"type.enum.variant" = "type"
 
 variable = "variable"
 "variable.other" = "variable"
