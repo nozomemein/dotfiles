@@ -13,6 +13,9 @@ H = "goto_line_start"
 L = "goto_line_end"
 "|" = "vsplit"
 "\\" = "hsplit"
+# inner word を選択してから word boundary 付きで search register に登録
+"A-*" = "search_selection_detect_word_boundaries"
+"*" = "@miw<A-*>"
 
 [keys.normal.space]
 e = {w = ":write", c = ":bc", x = ":bco", l = ":toggle lsp.display-inlay-hints" }
