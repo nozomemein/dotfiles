@@ -82,6 +82,8 @@ map("n", "<leader>gh", act "git.viewHistory", opts)
 map("n", "<leader>gb", act "gitlens.toggleFileBlame", opts) -- requires GitLens
 map("n", "<leader>gd", act "git.openChange", opts)
 map("n", "<leader>gm", act "workbench.scm.focus", opts)
+map("n", "[g", act "workbench.action.editor.previousChange", opts)
+map("n", "]g", act "workbench.action.editor.nextChange", opts)
 
 -- ─── bookmarks (requires "Bookmarks" extension by alefragnani) ──────
 map("n", "<leader>mm", act "bookmarks.toggle", opts)
