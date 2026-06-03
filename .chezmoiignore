@@ -2,6 +2,7 @@ dot_config/nvim/dot_git
 dot_config/nvim/lazy-lock.json
 dot_tmux/plugins/**
 README.md
+LICENSE
 justfile
 just
 setup.sh

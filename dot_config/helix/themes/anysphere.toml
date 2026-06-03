@@ -1,3 +1,8 @@
+# Helix port of the Anysphere Dark theme from Cursor.
+# Derived from the community VS Code extension hasokeric/cursor-anysphere-theme
+# (MIT, (c) 2024 Anysphere). Unofficial; not affiliated with Cursor or Anysphere.
+# See ./NOTICE.md for the upstream license notice.
+
 inherits = "github_dark"
 
 # === syntax ===
