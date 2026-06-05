@@ -7,6 +7,24 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "vim": {
+    "use_smartcase_find": false
+  },
+  "git": {
+    "inline_blame": {
+      "show_commit_summary": true
+    }
+  },
+  "colorize_brackets": false,
+  "toolbar": {
+    "selections_menu": true,
+    "agent_review": false,
+    "breadcrumbs": true
+  },
+  "which_key": {
+    "enabled": true
+  },
+  "helix_mode": false,
   "server_url": "https://zed.dev",
   "proxy": "",
   "cli_default_open_behavior": "existing_window",
