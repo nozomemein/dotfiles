@@ -138,6 +138,21 @@ scan_raw_bypass_rules() {
      grep_re '(^|[[:space:]])((-X[[:space:]=]*)|(--method([[:space:]]+|=)))(delete|put|patch)([[:space:]]|$)' "$scan"; then
     block "$raw" "gh api の破壊的メソッド (DELETE/PUT/PATCH) は禁止"
   fi
+
+  # ---- AWS CLI: S3 系の破壊操作 ----
+  local aws_path='(/[^[:space:];|&()<>{}`]+/)?aws'
+  local aws_cmd="${boundary}[[:space:]]*${wrappers}${aws_path}[[:space:]]+"
+  local aws_dangerous='(s3[[:space:]]+(rm|rb|mv)|s3api[[:space:]]+(delete-bucket|delete-bucket-policy|delete-bucket-lifecycle|delete-bucket-cors|delete-bucket-website|delete-bucket-tagging|delete-bucket-replication|delete-bucket-encryption|delete-public-access-block|delete-object|delete-objects|delete-object-tagging|put-bucket-acl|put-bucket-policy|put-object-acl|put-bucket-versioning))'
+
+  grep_re "${aws_cmd}${aws_dangerous}([[:space:]]|$)" "$scan" && block "$raw" "危険な aws S3 操作"
+  grep_re "${aws_cmd}s3[[:space:]]+sync.*--delete\b" "$scan" && block "$raw" "aws s3 sync --delete は禁止"
+
+  # shell -c 経由の aws s3 / s3api も同等に block
+  local shell_c="${boundary}[[:space:]]*${wrappers}((/[^[:space:];|&()<>{}\`]+/)?(ba|z)?sh|dash)[[:space:]]+-[^[:space:]]*c[[:space:]]+"
+  grep_re "${shell_c}.*${aws_path}[[:space:]]+(s3|s3api)[[:space:]]+" "$scan" && block "$raw" "shell -c 経由の aws は禁止"
+
+  # 全 grep_re が match しなかった場合の戻り値正規化 (set -e で落ちないように)
+  return 0
 }
 
 scan_raw_bypass_rules "$NORMALIZED_COMMAND" "$SCAN_COMMAND"
