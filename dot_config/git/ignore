@@ -1,0 +1,42 @@
+# Claude Code
+**/.claude/settings.local.json
+
+# Secrets / env
+.env
+.env.*
+*.env
+*.env.*
+secrets/
+.secrets/
+.bundle/config
+.aws/
+.ssh/
+.config/gh/
+.config/gcloud/
+.docker/
+.git-credentials
+.config/git/credentials
+.netrc
+.npmrc
+.pypirc
+.gem/credentials
+.cargo/credentials
+.cargo/credentials.toml
+
+# Keys / certs
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+
+# Terraform
+*.tfvars
+*.tfvars.json
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfplan
+
+# macOS
+.DS_Store
