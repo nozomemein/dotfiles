@@ -9,7 +9,7 @@
     }
   },
 
-  // ─── insert mode: jj → ESC (NvChad local) ──────────────────────────────
+  // insert mode: jj → ESC
   {
     "context": "vim_mode == insert",
     "bindings": {
@@ -17,7 +17,7 @@
     }
   },
 
-  // ─── normal mode: NvChad-style leader (space) + Ctrl bindings ──────────
+  // normal mode: leader (space) + Ctrl bindings
   {
     "context": "vim_mode == normal && vim_operator == none && !VimWaiting",
     "bindings": {
@@ -36,6 +36,10 @@
       "] b": "pane::ActivateNextItem",
       "[ b": "pane::ActivatePreviousItem",
 
+      // git hunk nav
+      "] g": "editor::GoToHunk",
+      "[ g": "editor::GoToPreviousHunk",
+
       // splits (local: | vsplit / \ hsplit)
       "|": "pane::SplitRight",
       "\\": "pane::SplitDown",
@@ -47,7 +51,7 @@
       // project panel (NvimTree)
       "ctrl-n": "project_panel::ToggleFocus",
 
-      // ── leader (space) bindings ─────────────────────────────────────
+      // leader (space) bindings
       // telescope-ish finders
       "space f f": "file_finder::Toggle",
       "space f w": "workspace::NewSearch",
@@ -89,8 +93,7 @@
     }
   },
 
-  // ─── visual mode: leader (space) bindings ──────────────────────────────
-  {
+  // visual mode: leader (space) bindings
     "context": "vim_mode == visual",
     "bindings": {
       "space /": "editor::ToggleComments",

@@ -7,6 +7,7 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "diff_view_style": "split",
   "vim": {
     "use_smartcase_find": false
   },
@@ -33,7 +34,7 @@
   },
   "buffer_font_family": "Fira Code",
   "icon_theme": {
-    "mode": "light",
+    "mode": "dark",
     "light": "Bearded Icon Theme",
     "dark": "Bearded Icon Theme"
   },
