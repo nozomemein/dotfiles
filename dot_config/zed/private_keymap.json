@@ -97,6 +97,7 @@
       "space g h": "git::FileHistory",
       "space g b": "git::Blame",
       "space g g": "git_panel::ToggleFocus",
+      "space g c": "git::ExpandCommitEditor",
       "space g d": "git::Diff",
       "space g m": "git::OpenModifiedFiles"
     }
