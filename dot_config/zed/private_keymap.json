@@ -48,6 +48,15 @@
       "shift-h": "vim::FirstNonWhitespace",
       "shift-l": "vim::EndOfLine",
 
+      // folds (Vim/NvChad-style z* bindings)
+      "z a": "editor::ToggleFold",
+      "z c": "editor::Fold",
+      "z o": "editor::UnfoldLines",
+      "z shift-a": "editor::ToggleFoldRecursive",
+      "z shift-o": "editor::UnfoldRecursive",
+      "z shift-m": "editor::FoldAll",
+      "z shift-r": "editor::UnfoldAll",
+
       // project panel (NvimTree)
       "ctrl-n": "project_panel::ToggleFocus",
 
