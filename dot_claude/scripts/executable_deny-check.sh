@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Claude Code PreToolUse Hook: Bash コマンド検証スクリプト
-# bypass-permission モードでも hook は走るので、ここが本当の防壁。
-# fail-closed 原則: 解析エラー時はブロック。
+# Claude Code PreToolUse Hook: Bash command validator.
+# Hooks fire even in bypass-permission mode, so this is the real barrier.
+# Fail-closed: any parse error blocks the command.
 
 SETTINGS_FILE="$HOME/.claude/settings.json"
 
 emit_error() {
-  jq -cn --arg error "🚫 ブロックされました: $1" '{error:$error}'
+  jq -cn --arg error "🚫 Blocked: $1" '{error:$error}'
 }
 
 INPUT=$(cat)
 
 if ! TOOL_NAME=$(printf '%s' "$INPUT" | jq -r '.tool_name // empty' 2>/dev/null); then
-  emit_error "hook input JSON が不正"
+  emit_error "invalid hook input JSON"
   exit 2
 fi
 
 if ! COMMAND=$(printf '%s' "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/null); then
-  emit_error "hook input JSON が不正"
+  emit_error "invalid hook input JSON"
   exit 2
 fi
 
@@ -30,13 +30,13 @@ if [[ -z "$COMMAND" ]]; then
   exit 0
 fi
 
-# ---- 正規化ヘルパ ----
-# tab/改行/連続スペースを単一空白へ
+# ---- Normalization helpers ----
+# Collapse tabs / newlines / runs of spaces into a single space.
 normalize_shell_text() {
   printf '%s' "$1" | tr '\n\t\r' '   ' | sed -E 's/[[:space:]]+/ /g; s/^ //; s/ $//'
 }
 
-# 単純なクォート剥がし (検出用)
+# Simple quote stripping (for detection only).
 strip_shell_quotes() {
   printf '%s' "$1" | tr -d "\"'"
 }
@@ -54,15 +54,15 @@ grep_re() {
   grep -Eiq -- "$regex" <<< "$text"
 }
 
-# &&, ||, ; で論理セクション分割した上で各セクションを正規化
+# Split by &&, ||, ; into logical sections and normalize each.
 IFS=$'\n'
 CMD_PARTS=$(printf '%s' "$COMMAND" | sed 's/&&/\n/g; s/||/\n/g; s/;/\n/g' | while IFS= read -r line; do normalize_shell_text "$line"; done)
 NORMALIZED_COMMAND=$(normalize_shell_text "$COMMAND")
 SCAN_COMMAND=$(strip_shell_quotes "$NORMALIZED_COMMAND")
 
-# ---- (1) settings.json の deny パターンによる prefix-match ----
-# Claude Code 本体の prefix-wildcard 仕様:
-#   "Bash(foo *)" は "foo" 単体にもマッチ → 末尾 " *" を ([[:space:]]+.*)? に変換
+# ---- (1) prefix-match against settings.json deny patterns ----
+# Mimic Claude Code's prefix-wildcard semantics:
+#   "Bash(foo *)" should also match the bare "foo" (trailing " *" → ([[:space:]]+.*)?).
 match_pattern() {
   local cmd="$1"
   local pattern="$2"
@@ -71,7 +71,7 @@ match_pattern() {
   local inner
   inner=$(normalize_shell_text "${BASH_REMATCH[1]}")
 
-  # 正規表現メタ文字エスケープ ( * は後で展開、\ や [ ] も含める)
+  # Escape regex metacharacters (* is expanded later; also escape \ [ ]).
   local escaped
   escaped=$(printf '%s' "$inner" | sed -E 's/[][\\.^$()+?{}|]/\\&/g')
 
@@ -100,16 +100,17 @@ if [[ -f "$SETTINGS_FILE" ]]; then
       while IFS= read -r pattern; do
         [[ -z "$pattern" ]] && continue
         if match_pattern "$part" "$pattern"; then
-          block "$part" "パターン: $pattern"
+          block "$part" "pattern: $pattern"
         fi
       done <<< "$DENY_PATTERNS"
     done
   fi
 fi
 
-# ---- (2) raw command 全体への危険構文 scan ----
-# pipe / command substitution / eval / bash -c / xargs / 絶対パス / wrapper 経由 / 動的サブコマンド
-# (引数順序が任意な gh api の HTTP method もここで)
+# ---- (2) Scan the raw command for dangerous syntax ----
+# Covers: pipe / command substitution / eval / bash -c / xargs /
+# absolute path / wrapper invocation / dynamic subcommand.
+# (gh api's HTTP method check goes here too because flag order is arbitrary.)
 scan_raw_bypass_rules() {
   local raw="$1"
   local scan="$2"
@@ -120,38 +121,38 @@ scan_raw_bypass_rules() {
   local gh_cmd="${boundary}[[:space:]]*${wrappers}${gh_path}[[:space:]]+"
   local topics='(repo|pr|issue|release|secret|variable|ssh-key|gpg-key|auth|ruleset|rs|workflow|api|cache|codespace|cs|gist|label|project|run|alias|extension|ext|config)'
   local dyn='(\$\(|\$[A-Za-z_][A-Za-z0-9_]*|`)'
-  # 許可リスト(scan からは除外):
+  # Allow list (also excluded from the scan):
   #   gh pr edit / update-branch / merge
   #   gh issue edit
   #   gh workflow run
   local dangerous='(repo[[:space:]]+(delete|archive|edit|rename|unarchive|sync|set-default)|repo[[:space:]]+autolink[[:space:]]+(create|delete)|repo[[:space:]]+deploy-key[[:space:]]+(add|delete)|pr[[:space:]]+(close|lock)|issue[[:space:]]+(close|delete|lock|transfer|pin|unpin)|release[[:space:]]+(delete|delete-asset|edit|upload)|secret[[:space:]]+(delete|remove|set)|variable[[:space:]]+(delete|remove|set)|ssh-key[[:space:]]+delete|gpg-key[[:space:]]+delete|auth[[:space:]]+(logout|login|refresh|switch|setup-git)|ruleset[[:space:]]+(create|edit|delete)|rs[[:space:]]+(create|edit|delete)|workflow[[:space:]]+(disable|enable)|cache[[:space:]]+delete|codespace[[:space:]]+(delete|edit|stop)|cs[[:space:]]+(delete|edit|stop)|label[[:space:]]+(clone|create|delete|edit)|gist[[:space:]]+(delete|edit|rename)|project[[:space:]]+(close|copy|create|delete|edit|field-create|field-delete|item-add|item-archive|item-create|item-delete|item-edit|link|unlink|mark-template)|run[[:space:]]+(cancel|delete)|alias[[:space:]]+(set|import)|extension[[:space:]]+(install|remove|upgrade)|ext[[:space:]]+(install|remove|upgrade)|config[[:space:]]+set)'
 
-  grep_re "${gh_cmd}${dangerous}([[:space:]]|$)" "$scan" && block "$raw" "危険な gh サブコマンド"
-  grep_re "${gh_cmd}${topics}[[:space:]]+${dyn}" "$scan" && block "$raw" "gh の動的サブコマンドは検査不能"
-  grep_re "${boundary}[[:space:]]*${dyn}[[:space:]]+${topics}[[:space:]]+" "$scan" && block "$raw" "動的 gh 呼び出しは検査不能"
-  grep_re "${boundary}[[:space:]]*eval[[:space:]]+.*${gh_path}[[:space:]]+" "$scan" && block "$raw" "eval 経由の gh は禁止"
-  grep_re "${boundary}[[:space:]]*${wrappers}((/[^[:space:];|&()<>{}\`]+/)?(ba|z)?sh|dash)[[:space:]]+-[^[:space:]]*c[[:space:]]+.*${gh_path}[[:space:]]+" "$scan" && block "$raw" "shell -c 経由の gh は禁止"
-  grep_re "${boundary}.*xargs([^;&|]*[[:space:]])${wrappers}${gh_path}[[:space:]]+${dangerous}" "$scan" && block "$raw" "xargs 経由の危険な gh"
-  grep_re '\|[[:space:]]*((/[^[:space:];|&()<>{}`]+/)?(ba|z)?sh|dash)([[:space:]]|$)' "$raw" && block "$raw" "pipe-to-shell は禁止"
+  grep_re "${gh_cmd}${dangerous}([[:space:]]|$)" "$scan" && block "$raw" "dangerous gh subcommand"
+  grep_re "${gh_cmd}${topics}[[:space:]]+${dyn}" "$scan" && block "$raw" "dynamic gh subcommand is not analyzable"
+  grep_re "${boundary}[[:space:]]*${dyn}[[:space:]]+${topics}[[:space:]]+" "$scan" && block "$raw" "dynamic gh invocation is not analyzable"
+  grep_re "${boundary}[[:space:]]*eval[[:space:]]+.*${gh_path}[[:space:]]+" "$scan" && block "$raw" "gh via eval is forbidden"
+  grep_re "${boundary}[[:space:]]*${wrappers}((/[^[:space:];|&()<>{}\`]+/)?(ba|z)?sh|dash)[[:space:]]+-[^[:space:]]*c[[:space:]]+.*${gh_path}[[:space:]]+" "$scan" && block "$raw" "gh via shell -c is forbidden"
+  grep_re "${boundary}.*xargs([^;&|]*[[:space:]])${wrappers}${gh_path}[[:space:]]+${dangerous}" "$scan" && block "$raw" "dangerous gh via xargs"
+  grep_re '\|[[:space:]]*((/[^[:space:];|&()<>{}`]+/)?(ba|z)?sh|dash)([[:space:]]|$)' "$raw" && block "$raw" "pipe-to-shell is forbidden"
 
   if grep_re "${gh_cmd}api([[:space:]]|$)" "$scan" &&
      grep_re '(^|[[:space:]])((-X[[:space:]=]*)|(--method([[:space:]]+|=)))(delete|put|patch)([[:space:]]|$)' "$scan"; then
-    block "$raw" "gh api の破壊的メソッド (DELETE/PUT/PATCH) は禁止"
+    block "$raw" "destructive gh api method (DELETE/PUT/PATCH) is forbidden"
   fi
 
-  # ---- AWS CLI: S3 系の破壊操作 ----
+  # ---- AWS CLI: destructive S3 operations ----
   local aws_path='(/[^[:space:];|&()<>{}`]+/)?aws'
   local aws_cmd="${boundary}[[:space:]]*${wrappers}${aws_path}[[:space:]]+"
   local aws_dangerous='(s3[[:space:]]+(rm|rb|mv)|s3api[[:space:]]+(delete-bucket|delete-bucket-policy|delete-bucket-lifecycle|delete-bucket-cors|delete-bucket-website|delete-bucket-tagging|delete-bucket-replication|delete-bucket-encryption|delete-public-access-block|delete-object|delete-objects|delete-object-tagging|put-bucket-acl|put-bucket-policy|put-object-acl|put-bucket-versioning))'
 
-  grep_re "${aws_cmd}${aws_dangerous}([[:space:]]|$)" "$scan" && block "$raw" "危険な aws S3 操作"
-  grep_re "${aws_cmd}s3[[:space:]]+sync.*--delete\b" "$scan" && block "$raw" "aws s3 sync --delete は禁止"
+  grep_re "${aws_cmd}${aws_dangerous}([[:space:]]|$)" "$scan" && block "$raw" "dangerous aws S3 operation"
+  grep_re "${aws_cmd}s3[[:space:]]+sync.*--delete\b" "$scan" && block "$raw" "aws s3 sync --delete is forbidden"
 
-  # shell -c 経由の aws s3 / s3api も同等に block
+  # Block aws s3 / s3api via shell -c the same way as gh.
   local shell_c="${boundary}[[:space:]]*${wrappers}((/[^[:space:];|&()<>{}\`]+/)?(ba|z)?sh|dash)[[:space:]]+-[^[:space:]]*c[[:space:]]+"
-  grep_re "${shell_c}.*${aws_path}[[:space:]]+(s3|s3api)[[:space:]]+" "$scan" && block "$raw" "shell -c 経由の aws は禁止"
+  grep_re "${shell_c}.*${aws_path}[[:space:]]+(s3|s3api)[[:space:]]+" "$scan" && block "$raw" "aws via shell -c is forbidden"
 
-  # 全 grep_re が match しなかった場合の戻り値正規化 (set -e で落ちないように)
+  # Normalize the return value so that no-match grep_re results don't trip set -e.
   return 0
 }
 

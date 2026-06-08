@@ -93,7 +93,7 @@
       "space m l": "editor::ViewBookmarks",
       "space m c": "workspace::ClearBookmarks",
 
-      // git (built-in, NvChad <leader>g* 相当)
+      // git
       "space g h": "git::FileHistory",
       "space g b": "git::Blame",
       "space g g": "git_panel::ToggleFocus",

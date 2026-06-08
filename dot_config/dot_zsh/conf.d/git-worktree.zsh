@@ -1,4 +1,4 @@
-# git worktree picker: fzf で選択 → そのワークツリーへ cd
+# git worktree picker: pick with fzf, then cd into the worktree
 gwcd() {
   local sel
   sel=$(git worktree list --porcelain 2>/dev/null | awk '

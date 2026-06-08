@@ -8,7 +8,7 @@ font-synthetic-style = no-italic,no-bold-italic
 font-feature = -dlig
 background-opacity = 0.8
 
-# 左 Option キーを Alt として送る (Helix の Alt-s 等を有効化)
-# 右 Option は macOS 本来の特殊文字入力に残す
+# Send the left Option key as Alt (so Helix's Alt-s etc. work).
+# Leave the right Option for macOS's native special-character input.
 macos-option-as-alt = left
 

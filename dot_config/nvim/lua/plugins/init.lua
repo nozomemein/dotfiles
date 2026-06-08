@@ -55,8 +55,8 @@ return {
       }
     end,
   },
-  -- NOTE: auto-settionが原因でsytaxが効かなくなるのでコメントアウト
-  -- 解決するまでautosessionは使わない
+  -- NOTE: commented out because auto-session breaks syntax highlighting.
+  -- Don't use auto-session until that's resolved.
   -- {
   --   "rmagatti/auto-session",
   --   lazy = false,

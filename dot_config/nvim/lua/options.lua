@@ -22,7 +22,7 @@ o.laststatus = 2     -- Always display the status line
 o.incsearch = true   -- Incremental search
 
 -- nvim-ufo settings
--- fold levelを99に設定しないと、ファイルを開いたときにfoldされてしまう
+-- Set fold level to 99; otherwise files open with folds collapsed.
 o.foldlevel = 99
 o.foldlevelstart = 99
 
