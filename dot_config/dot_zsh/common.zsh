@@ -30,6 +30,8 @@ prompt pure
 bindkey '^R' history-incremental-search-backward
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
+bindkey -M viins '^F' forward-char
+bindkey -M viins '^B' backward-char
 
 # auto suggestions
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
