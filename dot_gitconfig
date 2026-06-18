@@ -4,3 +4,10 @@
 	path = ~/.config/git/alias.conf
 	path = ~/.config/git/delta.conf
 	path = ~/.gitconfig.local
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+
+[commit]
+	verbose = true
