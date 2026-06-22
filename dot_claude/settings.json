@@ -145,7 +145,7 @@
     "codex@openai-codex": false,
     "frontend-design@claude-plugins-official": true
   },
-  "theme": "custom:anysphere",
+  "theme": "auto",
   "language": "Japanese",
   "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true,
