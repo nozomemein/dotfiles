@@ -1,0 +1,45 @@
+{
+  "name": "Anysphere",
+  "base": "dark",
+  "overrides": {
+    "claude": "#4d9aff",
+    "text": "#d6d6dd",
+    "inverseText": "#161618",
+    "inactive": "#6c6c6f",
+    "subtle": "#2e2e30",
+    "suggestion": "#4d9aff",
+    "permission": "#efb080",
+    "remember": "#c586c0",
+
+    "success": "#4ec9b0",
+    "error": "#f87171",
+    "warning": "#efb080",
+    "merged": "#c084fc",
+
+    "promptBorder": "#4d9aff",
+    "planMode": "#7b8cff",
+    "autoAccept": "#4ec9b0",
+    "bashBorder": "#efb080",
+    "ide": "#4d9aff",
+    "fastMode": "#c084fc",
+
+    "diffAdded": "#1e3a1e",
+    "diffRemoved": "#3a1e1e",
+    "diffAddedDimmed": "#162816",
+    "diffRemovedDimmed": "#281616",
+    "diffAddedWord": "#2d5a2d",
+    "diffRemovedWord": "#5a2d2d",
+
+    "userMessageBackground": "#1e1e21",
+    "userMessageBackgroundHover": "#26262a",
+    "messageActionsBackground": "#2a2a2e",
+    "bashMessageBackgroundColor": "#1a1a1c",
+    "memoryBackgroundColor": "#1a1a1c",
+    "selectionBg": "#264f78",
+
+    "rate_limit_fill": "#4d9aff",
+    "rate_limit_empty": "#2e2e30",
+    "briefLabelYou": "#4ec9b0",
+    "briefLabelClaude": "#4d9aff"
+  }
+}
