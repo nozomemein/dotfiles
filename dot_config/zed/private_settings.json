@@ -52,7 +52,7 @@
     // Cursor Dark: dev extension https://github.com/nexmoe/cursor-themes-for-zed
     //   cloned at ~/.local/share/zed-extensions/cursor-themes-for-zed
     //   installed via: cmd-shift-p → "zed: install dev extension"
-    "dark": "Cursor Dark"
+    "dark": "poimandres storm"
   },
   "buffer_font_size": 14,
   "autosave": {
