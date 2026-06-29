@@ -57,6 +57,12 @@ path_prepend "$HOME/.local/bin"
 # zoxide
 eval "$(zoxide init zsh)"
 
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# ghcup
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env"
+
 # conf.d loader
 for _f in "${HOME}/.config/.zsh/conf.d/"*.zsh(N); do
   source "$_f"
