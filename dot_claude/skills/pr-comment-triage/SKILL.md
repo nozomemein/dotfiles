@@ -61,6 +61,8 @@ query($owner:String!, $repo:String!, $pr:Int!) {
 
 `isResolved: false` のスレッドだけ拾う。`isOutdated: true` (元コードが変わって追跡できなくなった) はそのまま残すか、対応済み扱いにするかをユーザーに確認する。
 
+スレッドが 100 件を超える場合は `pageInfo { hasNextPage endCursor }` を足してページネーションする。
+
 ### Issue comment 系 (PR 全体の議論)
 
 review thread に紐づかない PR 全体コメントは `gh pr view --comments` で別途取得。これは resolve の概念がないので、**判定のみで終わり** (reply は本人判断)。
