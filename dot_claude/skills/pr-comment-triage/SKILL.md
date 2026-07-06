@@ -114,6 +114,18 @@ review thread に紐づかない PR 全体コメントは `gh pr view --comments
 - 想定影響範囲: <他に影響するか>
 ```
 
+#### 対応 commit には Co-Authored-By を付ける
+
+レビューコメントの指摘を取り込んだ commit には、コメントの writer を trailer として追加する:
+
+```text
+Co-Authored-By: <login> <<id>+<login>@users.noreply.github.com>
+```
+
+- noreply メールアドレスは `gh api users/<login> --jq '"\(.id)+\(.login)@users.noreply.github.com"'` で組み立てる
+- 1 commit で複数レビュアーの指摘を取り込んだ場合は、人数分の trailer を並べる
+- 対象は **指摘を反映した commit だけ**。「対応不要」で reply する場合や、指摘と無関係の commit には付けない
+
 ### 4-3. 対応不要スレッドの返信案
 
 ```
