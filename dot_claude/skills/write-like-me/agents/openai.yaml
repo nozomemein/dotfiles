@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Like Me"
+  short_description: "自分らしい文章のリズムと温度感を残し、媒体に合わせて書く"
+  default_prompt: "Use $write-like-me to rewrite this text while preserving my rhythm and temperature."
