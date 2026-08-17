@@ -14,7 +14,7 @@ Codex CLI を使用してコードレビュー・分析・相談を実行する�
 
 1. 対象プロジェクトのディレクトリを特定する（cwd またはユーザー指定）
 2. prompt を `/tmp/codex-prompt.txt` に heredoc で書き出す（末尾に下記の定型文を必ず追加）
-3. `codex exec --full-auto --sandbox read-only -m gpt-5.5 --cd <dir> - < /tmp/codex-prompt.txt` で実行
+3. `codex exec --sandbox read-only -m gpt-5.5 --cd <dir> - < /tmp/codex-prompt.txt` で実行
 4. 結果をユーザーに報告
 
 ## 実行コマンド（ファイル経由 stdin が必須）
@@ -30,7 +30,7 @@ cat > /tmp/codex-prompt.txt <<'EOF'
 EOF
 
 # 2. codex 実行（- で stdin から prompt を読む）
-codex exec --full-auto --sandbox read-only -m gpt-5.5 --cd <project_dir> - < /tmp/codex-prompt.txt
+codex exec --sandbox read-only -m gpt-5.5 --cd <project_dir> - < /tmp/codex-prompt.txt
 ```
 
 prompt の末尾には必ず「確認や質問は不要です。具体的な提案・修正案・コード例まで自主的に出力してください。」を含める。Codex が確認待ちで止まるのを防ぐため。
@@ -39,8 +39,7 @@ prompt の末尾には必ず「確認や質問は不要です。具体的な提�
 
 | パラメータ | 説明 |
 |---|---|
-| `--full-auto` | 完全自動モード |
-| `--sandbox read-only` | 読み取り専用 sandbox（安全な分析用） |
+| `--sandbox read-only` | 読み取り専用 sandbox（安全な分析用）。`codex exec` は非対話なので approval は常に `never`。`--full-auto` は deprecated（`--sandbox workspace-write` の別名）なので付けない |
 | `-m gpt-5.5` | モデル指定（必須、ユーザ既定） |
 | `--cd <dir>` | 対象プロジェクトのディレクトリ |
 | `-` | stdin から prompt を読む |
@@ -72,12 +71,16 @@ prompt の末尾には必ず「確認や質問は不要です。具体的な提�
 - 対処: 必ず **ファイル経由 stdin** パターンを使う。インライン引数はそもそも使わない
 
 ### `Reading additional input from stdin...` のままストールする
-- 原因: Codex CLI は full-auto でも対話 stdin を開けっぱなしにすることがある
+- 原因: Codex CLI は exec モードでも対話 stdin を開けっぱなしにすることがある
 - 対処:
   - ファイル経由 stdin パターン（`- < /tmp/codex-prompt.txt`）なら EOF で自動的に閉じるので発生しない
   - 引数 prompt を使う場合は `< /dev/null` を必ず付ける
   - 5 分以上 output 行数が増えなければ kill して prompt を短くして再実行
   - `-m gpt-5.5` を必ず付ける（ユーザ既定モデル）
+
+### `failed to load models cache: missing field ...` が出る
+- 原因: `~/.codex/models_cache.json` を ChatGPT アプリ / VS Code 拡張の新しい codex が書き、古い CLI がスキーマを読めない (バージョンずれ)
+- 対処: `npm i -g @openai/codex@latest && asdf reshim nodejs` で CLI を追従させる。非致命なので急ぎでなければ無視してよい
 
 ### sandbox 制限で `cargo check` 等が失敗
 - `CARGO_TARGET_DIR=/tmp/codex-target` を環境変数で渡せば共有 target 外で動く
