@@ -4,17 +4,15 @@ return {
   "williamboman/mason-lspconfig.nvim",
   config = function()
     require("mason-lspconfig").setup {
-      opts = {
-        ensure_installed = {
-          "lua_ls",
-          "solargraph",
-          "tailwindcss-language-server",
-          "typescript-language-server",
-          "gopls",
-          "terraform-ls",
-          "rust-analyzer"
-        }
-      }
+      ensure_installed = {
+        "lua_ls",
+        "solargraph",
+        "tailwindcss",
+        "ts_ls",
+        "gopls",
+        "terraformls",
+        "rust_analyzer",
+      },
     }
   end,
 }
