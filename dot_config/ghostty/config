@@ -12,4 +12,5 @@ background-opacity = 0.8
 # Send the left Option key as Alt (so Helix's Alt-s etc. work).
 # Leave the right Option for macOS's native special-character input.
 macos-option-as-alt = left
+confirm-close-surface = false
 
