@@ -1,5 +1,6 @@
 # Run all setup tasks
-all: rust bun node claude-code codex brew-install
+# brew-install must come first: node needs asdf (from Brewfile), codex needs npm (from node)
+all: brew-install rust bun node codex claude-code
 
 # Install packages from Brewfile
 brew-install:
@@ -11,7 +12,7 @@ rust:
     if command -v rustc &>/dev/null; then
         echo "rust: $(rustc --version)"
     else
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     fi
 
 # Install Bun
@@ -30,6 +31,7 @@ node:
         echo "Skipping: asdf + Node.js setup is macOS only"
         exit 0
     fi
+    export PATH="$HOME/.asdf/shims:$PATH"
     if ! command -v asdf &>/dev/null; then
         echo "asdf not found. Install it first (brew install asdf)"
         exit 1
@@ -56,6 +58,8 @@ claude-code:
 # Install OpenAI Codex via npm
 codex:
     #!/usr/bin/env zsh
+    # On first run zshrc is not loaded yet, so add asdf shims (npm) to PATH explicitly
+    export PATH="$HOME/.asdf/shims:$PATH"
     if command -v codex &>/dev/null; then
         echo "codex: $(codex --version)"
     else

@@ -5,7 +5,7 @@ Dotfiles managed by [chezmoi](https://github.com/twpayne/chezmoi). macOS only.
 ```bash
 git clone https://github.com/nozomemein/dotfiles.git ~/.local/share/chezmoi
 cd ~/.local/share/chezmoi
-sh setup.sh
+bash setup.sh
 ```
 
 ## Commands
