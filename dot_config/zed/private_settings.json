@@ -47,13 +47,34 @@
     },
   },
   "vim_mode": true,
+  // Auto-install marketplace extensions on startup
+  "auto_install_extensions": {
+    "bearded-icon-theme": true,
+    "catppuccin-blur": true,
+    "catppuccin-icons": true,
+    "colored-zed-icons-theme": true,
+    "html": true,
+    "just": true,
+    "kanagawa-themes": true,
+    "material-icon-theme": true,
+    "mermaid": true,
+    "poimandres": true,
+    "ruby": true,
+    "sql": true,
+    "terraform": true,
+    "tokyo-night": true,
+    "toml": true,
+  },
   "theme": {
     "mode": "dark",
     "light": "One Light",
     // Cursor Dark: dev extension https://github.com/nexmoe/cursor-themes-for-zed
     //   cloned at ~/.local/share/zed-extensions/cursor-themes-for-zed
     //   installed via: cmd-shift-p → "zed: install dev extension"
-    "dark": "One Dark"
+    // Catppuccin Blur: macOS window blur variants
+    //   bases: Espresso (near-black) / Mocha (dark navy) etc.
+    //   suffixes: "[Light]" (less blur) / "[Heavy]" (more blur)
+    "dark": "Catppuccin Mocha (Blur)"
   },
   "buffer_font_size": 14,
   "autosave": {
