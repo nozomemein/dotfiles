@@ -3,7 +3,21 @@
   {
     "context": "Workspace",
     "bindings": {
-      "cmd-shift-g": "git_panel::ToggleFocus"
+      "cmd-shift-g": "git_panel::ToggleFocus",
+      // open commit modal from anywhere (also bound to "space g c" in vim normal mode)
+      "cmd-alt-c": "git::ExpandCommitEditor"
+    }
+  },
+
+  // nvim-style ctrl-hjkl window navigation from docked panels
+  // (panels behave like nvim windows; Terminal excluded to keep ctrl-l = clear)
+  {
+    "context": "Dock && !Terminal",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight"
     }
   },
 
