@@ -93,6 +93,8 @@
 
       // toggles
       "space n": "editor::ToggleLineNumbers",
+      // zen mode (like nvim's zen-mode)
+      "space z z": "workspace::ToggleCenteredLayout",
 
       // bookmarks (built-in)
       "space m m": "editor::ToggleBookmark",
