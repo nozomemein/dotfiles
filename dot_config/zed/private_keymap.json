@@ -1,11 +1,19 @@
 [
-  // cmd-shift-g: git panel をトグル (デフォルトの search::SelectPreviousMatch を上書き)
+  // cmd-shift-g: toggle git panel (overrides default search::SelectPreviousMatch)
   {
     "context": "Workspace",
     "bindings": {
       "cmd-shift-g": "git_panel::ToggleFocus",
       // open commit modal from anywhere (also bound to "space g c" in vim normal mode)
       "cmd-alt-c": "git::ExpandCommitEditor"
+    }
+  },
+
+  // close the file tree with the same key while it is focused
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "ctrl-n": "project_panel::Toggle"
     }
   },
 
@@ -79,8 +87,8 @@
       "z shift-m": "editor::FoldAll",
       "z shift-r": "editor::UnfoldAll",
 
-      // project panel (NvimTree)
-      "ctrl-n": "project_panel::ToggleFocus",
+      // project panel (NvimTree): closed -> open + focus / open -> close
+      "ctrl-n": "project_panel::Toggle",
 
       // leader (space) bindings
       // telescope-ish finders
