@@ -107,7 +107,7 @@
       "Bash(wget * | sh)"
     ]
   },
-  "model": "claude-fable-5[1m]",
+  "model": "fable[1m]",
   "hooks": {
     "Stop": [
       {
@@ -160,7 +160,11 @@
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
+  "agentPushNotifEnabled": false,
   "feedbackSurveyState": {
     "lastShownTime": 1753999678646
+  },
+  "attribution": {
+    "sessionUrl": false
   }
 }
