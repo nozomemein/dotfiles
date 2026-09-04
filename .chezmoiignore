@@ -6,3 +6,4 @@ LICENSE
 justfile
 just
 setup.sh
+skills
