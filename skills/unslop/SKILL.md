@@ -1,11 +1,13 @@
 ---
 name: unslop
-description: Remove AI-sounding phrasing from a draft while preserving its meaning, evidence, and intended tone. Use when asked to make prose more natural or concise, including messages, PR text, and documentation; use a document review skill when structure or technical reasoning also needs work.
+description: Remove AI-sounding phrasing from a draft while preserving its meaning, evidence, and intended tone. Use on its own for a quick prose edit or as the final pass of refine-tech-document after structural editing.
 ---
 
 # Unslop
 
 Make the text sound like its author explaining something concrete to a colleague. Preserve claims, uncertainty, citations, names, commands, and code identifiers. Do not replace a vague claim with an invented fact.
+
+Run this skill on its own for a short draft, or after `refine-tech-document` has settled a document's structure and reasoning. This pass changes expression, not the underlying argument.
 
 1. Read the whole passage and identify its purpose and tone. Keep wording that serves either one, even if it matches a pattern below.
 2. Remove filler openings, repeated summaries, decorative headings, forced groups of three, and praise that adds no information.
