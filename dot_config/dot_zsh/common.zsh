@@ -50,6 +50,9 @@ path_prepend "$ASDF_DATA_DIR/shims"
 # cargo
 path_prepend "$HOME/.cargo/bin"
 
+export PNPM_HOME="$HOME/Library/pnpm"
+path_prepend "$PNPM_HOME/bin"
+
 # java
 path_prepend "$(brew --prefix)/opt/openjdk/bin"
 
