@@ -4,7 +4,7 @@
 -- transparency toggle) is derived from the entry in `M.themes`.
 local M = {}
 
-M.current = "bamboo"
+M.current = "oldworld"
 M.transparent = true
 
 -- Each entry: plugin repo, the :colorscheme name, the lualine theme name,
@@ -67,6 +67,37 @@ M.themes = {
           -- the line a grep hit points to in the Telescope previewer
           TelescopePreviewLine = { fg = "$bg0", bg = "$bg_blue", fmt = "bold" },
         },
+      }
+    end,
+  },
+
+  oldworld = {
+    plugin = "dgox16/oldworld.nvim",
+    colorscheme = "oldworld",
+    lualine = "oldworld",
+    setup = function(transparent)
+      local variant = "default" -- default / cooler / oled
+      local p = require("oldworld.variants")(variant)
+
+      local overrides = {
+        -- make the selected completion item / grep hit stand out
+        BlinkCmpMenuSelection = { fg = p.bg, bg = p.blue, bold = true },
+        TelescopePreviewLine = { fg = p.bg, bg = p.blue, bold = true },
+      }
+      if transparent then
+        -- the plugin has no transparent option, so clear the backgrounds here;
+        -- popups keep their own dark background for readability
+        overrides.Normal = { fg = p.fg, bg = "NONE" }
+        overrides.NormalNC = { fg = p.fg, bg = "NONE" }
+        overrides.SignColumn = { fg = p.subtext4, bg = "NONE" }
+        overrides.StatusLine = { fg = p.fg, bg = "NONE" }
+        overrides.EndOfBuffer = { fg = "NONE", bg = "NONE" }
+      end
+
+      require("oldworld").setup {
+        variant = variant,
+        styles = { comments = { italic = true } },
+        highlight_overrides = overrides,
       }
     end,
   },
