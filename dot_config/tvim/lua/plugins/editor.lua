@@ -137,5 +137,18 @@ return {
   {
     "bronson/vim-trailing-whitespace",
     lazy = false,
+    init = function()
+      -- completion popups pad entries with spaces; don't paint them red
+      vim.g.extra_whitespace_ignored_filetypes = {
+        "blink-cmp-menu",
+        "blink-cmp-documentation",
+        "blink-cmp-signature",
+        "TelescopePrompt",
+        "TelescopeResults",
+        "lazy",
+        "mason",
+        "toggleterm",
+      }
+    end,
   },
 }
