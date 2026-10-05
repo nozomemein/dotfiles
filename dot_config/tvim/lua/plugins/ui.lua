@@ -1,12 +1,6 @@
 return {
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("core.theme").apply()
-    end,
-  },
+  -- colorscheme: see lua/core/theme.lua
+  require("core.theme").spec(),
 
   {
     "nvim-tree/nvim-web-devicons",
@@ -18,7 +12,7 @@ return {
     lazy = false,
     opts = {
       options = {
-        theme = "tokyonight",
+        theme = require("core.theme").lualine(),
         globalstatus = true,
         component_separators = "",
         section_separators = "",
