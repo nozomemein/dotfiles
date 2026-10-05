@@ -20,6 +20,8 @@ alias gss='g status -sb'
 alias cz='chezmoi'
 alias cat='bat'
 alias ccdang="claude --dangerously-skip-permissions"
+# Alternative Neovim config, run side by side during migration (see dot_config/tvim)
+alias tvim="NVIM_APPNAME=tvim nvim"
 
 # pure
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
