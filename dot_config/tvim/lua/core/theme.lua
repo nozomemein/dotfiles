@@ -1,59 +1,38 @@
--- material.nvim setup with a runtime transparency toggle.
+-- tokyonight setup with a runtime transparency toggle.
 local M = {}
-
--- Diff highlight overrides (diffview)
-local colors = {
-  blue = "#7aa2f7",
-  green = "#9ece6a",
-  red = "#f7768e",
-  purple = "#bb9af7",
-  background = "#24283b",
-}
 
 M.transparent = true
 
 local function opts()
   return {
-    contrast = {
-      terminal = false,
-      sidebars = false,
-      floating_windows = false,
-    },
+    style = "night",
+    transparent = M.transparent,
     styles = {
       comments = { italic = true },
+      sidebars = M.transparent and "transparent" or "dark",
+      -- keep floats opaque so popups (completion menu, docs) stay readable
+      floats = "dark",
     },
-    plugins = {
-      "blink",
-      "dap",
-      "gitsigns",
-      "indent-blankline",
-      "neotest",
-      "nvim-tree",
-      "nvim-web-devicons",
-      "telescope",
-      "which-key",
-    },
-    disable = {
-      background = M.transparent,
-    },
-    custom_highlights = {
-      DiffAdd = { fg = colors.purple, bg = colors.background },
-      DiffChange = { fg = colors.purple, bg = colors.background },
-      DiffDelete = { fg = colors.purple, bg = colors.background },
-      DiffText = { fg = colors.purple, bg = colors.background },
-      DiffAdded = { fg = colors.purple, bg = colors.background },
-      DiffRemoved = { fg = colors.purple, bg = colors.background },
-      DiffFile = { fg = colors.blue, bg = colors.background },
-      DiffNewFile = { fg = colors.green, bg = colors.background },
-      DiffOldFile = { fg = colors.red, bg = colors.background },
-    },
+    -- Diff highlight overrides (diffview)
+    on_highlights = function(hl, c)
+      -- make the selected completion item stand out
+      hl.BlinkCmpMenuSelection = { bg = c.bg_visual, bold = true }
+      hl.DiffAdd = { fg = c.purple, bg = c.bg_highlight }
+      hl.DiffChange = { fg = c.purple, bg = c.bg_highlight }
+      hl.DiffDelete = { fg = c.purple, bg = c.bg_highlight }
+      hl.DiffText = { fg = c.purple, bg = c.bg_highlight }
+      hl.DiffAdded = { fg = c.purple, bg = c.bg_highlight }
+      hl.DiffRemoved = { fg = c.purple, bg = c.bg_highlight }
+      hl.DiffFile = { fg = c.blue, bg = c.bg_highlight }
+      hl.DiffNewFile = { fg = c.green, bg = c.bg_highlight }
+      hl.DiffOldFile = { fg = c.red, bg = c.bg_highlight }
+    end,
   }
 end
 
 function M.apply()
-  vim.g.material_style = "deep ocean"
-  require("material").setup(opts())
-  vim.cmd.colorscheme "material"
+  require("tokyonight").setup(opts())
+  vim.cmd.colorscheme "tokyonight"
 end
 
 function M.toggle_transparency()

@@ -12,7 +12,7 @@ require("lazy").setup({
   { import = "plugins" },
 }, {
   defaults = { lazy = true },
-  install = { colorscheme = { "material" } },
+  install = { colorscheme = { "tokyonight" } },
   checker = { enabled = false },
   rocks = { enabled = false }, -- no plugin here needs luarocks
   change_detection = { notify = false },

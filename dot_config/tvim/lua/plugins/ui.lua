@@ -1,6 +1,6 @@
 return {
   {
-    "marko-cerovac/material.nvim",
+    "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     config = function()
@@ -18,7 +18,7 @@ return {
     lazy = false,
     opts = {
       options = {
-        theme = "material-nvim",
+        theme = "tokyonight",
         globalstatus = true,
         component_separators = "",
         section_separators = "",
