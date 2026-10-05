@@ -1,3 +1,4 @@
+---@type string[]
 local dap_dependencies = {
   "mfussenegger/nvim-dap",
   "rcarriga/nvim-dap-ui",
@@ -5,6 +6,7 @@ local dap_dependencies = {
   "nvim-neotest/nvim-nio"
 }
 
+---@type LazySpec
 return {
   {
     "mfussenegger/nvim-dap",

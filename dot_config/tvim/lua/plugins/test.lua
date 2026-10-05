@@ -1,4 +1,5 @@
 -- RSpec adapter: runs inside the app container
+---@return neotest.Adapter
 local function get_rspec_adapter()
   return require "neotest-rspec" {
     rspec_cmd = function()
@@ -18,6 +19,7 @@ local function get_rspec_adapter()
   }
 end
 
+---@type LazySpec
 return {
   {
     "nvim-neotest/neotest",
@@ -30,6 +32,8 @@ return {
       { "fredrikaverpil/neotest-golang", version = "*" },
     },
     config = function()
+      -- neotest annotates every config field as required
+      ---@diagnostic disable-next-line: missing-fields
       require("neotest").setup {
         adapters = {
           get_rspec_adapter(),

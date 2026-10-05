@@ -2,6 +2,19 @@
 -- To switch themes, change `M.current` below (then :Lazy sync once).
 -- Everything else (plugin spec, lualine theme, lazy install colorscheme,
 -- transparency toggle) is derived from the entry in `M.themes`.
+
+---@alias ThemeName "tokyonight"|"bamboo"|"oldworld"|"material"
+
+---@class ThemeEntry
+---@field plugin string lazy.nvim plugin name ("owner/repo")
+---@field colorscheme string argument for :colorscheme
+---@field lualine string lualine theme name (lua/lualine/themes/<name>.lua)
+---@field setup fun(transparent: boolean) configures the plugin; runs before :colorscheme
+
+---@class Theme
+---@field current ThemeName
+---@field transparent boolean
+---@field themes table<ThemeName, ThemeEntry>
 local M = {}
 
 M.current = "oldworld"
@@ -131,11 +144,13 @@ M.themes = {
   },
 }
 
+---@return ThemeEntry
 local function theme()
   return assert(M.themes[M.current], "unknown theme: " .. tostring(M.current))
 end
 
 -- lazy.nvim plugin spec for the active theme (used by plugins/ui.lua)
+---@return LazyPluginSpec
 function M.spec()
   return {
     theme().plugin,
@@ -145,14 +160,17 @@ function M.spec()
   }
 end
 
+---@return string
 function M.colorscheme()
   return theme().colorscheme
 end
 
+---@return string
 function M.lualine()
   return theme().lualine
 end
 
+-- Configure the active theme and (re)apply it. Also used by the transparency toggle.
 function M.apply()
   local t = theme()
   t.setup(M.transparent)

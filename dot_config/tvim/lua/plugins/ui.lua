@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   -- colorscheme: see lua/core/theme.lua
   require("core.theme").spec(),
@@ -28,6 +29,9 @@ return {
         yellow = theme.command.a.bg,
         grey = theme.normal.b.bg,
       }
+      ---@param bg string
+      ---@param gui? string
+      ---@return { fg: string, bg: string, gui: string }
       local function pill(bg, gui)
         return { fg = fg, bg = bg, gui = gui or "bold" }
       end

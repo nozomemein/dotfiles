@@ -8,9 +8,8 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-  { import = "plugins" },
-}, {
+---@type LazyConfig
+local opts = {
   defaults = { lazy = true },
   install = { colorscheme = { require("core.theme").colorscheme() } },
   checker = { enabled = false },
@@ -59,4 +58,8 @@ require("lazy").setup({
       },
     },
   },
-})
+}
+
+require("lazy").setup({
+  { import = "plugins" },
+}, opts)

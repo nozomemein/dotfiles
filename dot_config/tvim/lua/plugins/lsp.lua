@@ -1,4 +1,5 @@
 -- LSP keymaps are buffer-local and attached via LspAttach.
+---@param bufnr integer
 local function on_attach(bufnr)
   local map = vim.keymap.set
   local function opts(desc)
@@ -19,6 +20,7 @@ local function on_attach(bufnr)
 end
 
 -- disable semanticTokens
+---@param client vim.lsp.Client
 local function on_init(client, _)
   if client:supports_method "textDocument/semanticTokens" then
     client.server_capabilities.semanticTokensProvider = nil
@@ -35,6 +37,7 @@ local function diagnostic_config()
   }
 end
 
+---@type string[] server names as known to nvim-lspconfig
 local servers = {
   "lua_ls",
   "html",
@@ -48,6 +51,7 @@ local servers = {
   "terraformls",
 }
 
+---@type LazySpec
 return {
   {
     "neovim/nvim-lspconfig",

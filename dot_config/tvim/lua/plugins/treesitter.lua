@@ -17,6 +17,7 @@ local languages = {
   "graphql",
 }
 
+---@type LazySpec
 return {
   {
     "nvim-treesitter/nvim-treesitter",
