@@ -2,6 +2,7 @@
 local languages = {
   "luadoc",
   "typescript",
+  "tsx", -- .tsx needs its own parser; .jsx is covered by javascript
   "javascript",
   "json",
   "html",
