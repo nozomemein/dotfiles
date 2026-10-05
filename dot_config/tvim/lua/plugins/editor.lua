@@ -6,7 +6,7 @@ return {
     opts = function()
       return {
         defaults = {
-          prompt_prefix = "   ",
+          prompt_prefix = " \u{f002}  ",
           selection_caret = " ",
           entry_prefix = " ",
           sorting_strategy = "ascending",
@@ -52,13 +52,13 @@ return {
           glyphs = {
             default = "󰈚",
             folder = {
-              default = "",
-              empty = "",
-              empty_open = "",
-              open = "",
-              symlink = "",
+              default = "\u{e6ad}",
+              empty = "\u{ea83}",
+              empty_open = "\u{ebdf}",
+              open = "\u{eaf6}",
+              symlink = "\u{eaed}",
             },
-            git = { unmerged = "" },
+            git = { unmerged = "\u{eafe}" },
           },
         },
       },

@@ -28,8 +28,8 @@ end
 local function diagnostic_config()
   local x = vim.diagnostic.severity
   vim.diagnostic.config {
-    virtual_text = { prefix = "" },
-    signs = { text = { [x.ERROR] = "󰅙", [x.WARN] = "", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
+    virtual_text = { prefix = "\u{f445}" },
+    signs = { text = { [x.ERROR] = "󰅙", [x.WARN] = "\u{f071}", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
     underline = true,
     float = { border = "single" },
   }
@@ -95,9 +95,9 @@ return {
       PATH = "skip", -- PATH is prepended in core/options.lua
       ui = {
         icons = {
-          package_pending = " ",
-          package_installed = " ",
-          package_uninstalled = " ",
+          package_pending = "\u{f019} ",
+          package_installed = "\u{f058} ",
+          package_uninstalled = "\u{f192} ",
         },
       },
       max_concurrent_installers = 10,

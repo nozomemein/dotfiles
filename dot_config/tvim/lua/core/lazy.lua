@@ -19,10 +19,10 @@ require("lazy").setup({
 
   ui = {
     icons = {
-      ft = "",
+      ft = "\u{f0f6}",
       lazy = "󰂠 ",
-      loaded = "",
-      not_loaded = "",
+      loaded = "\u{f058}",
+      not_loaded = "\u{f10c}",
     },
   },
 
