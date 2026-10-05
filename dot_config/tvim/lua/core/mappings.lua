@@ -31,7 +31,8 @@ map({ "n", "x" }, "<leader>fm", function()
 end, { desc = "general format file" })
 
 -- global lsp mappings
-map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
+map("n", "<leader>ds", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Diagnostics (buffer)" })
+map("n", "<leader>dS", "<cmd>Telescope diagnostics<CR>", { desc = "Diagnostics (workspace)" })
 
 -- buffers (bufferline)
 map("n", "<tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "buffer goto next" })

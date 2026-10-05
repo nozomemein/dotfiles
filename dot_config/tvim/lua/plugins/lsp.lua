@@ -7,17 +7,22 @@ local function on_attach(bufnr)
   end
 
   map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
-  map("n", "gd", vim.lsp.buf.definition, opts "Go to definition")
+  -- Telescope jumps directly when there is a single result and opens the
+  -- picker (with preview) only when there are several.
+  map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts "Go to definition")
   map("n", "K", vim.lsp.buf.hover, opts "Show hover")
   map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts "Add workspace folder")
   map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts "Remove workspace folder")
   map("n", "<leader>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, opts "List workspace folders")
-  map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
+  map("n", "<leader>D", "<cmd>Telescope lsp_type_definitions<CR>", opts "Go to type definition")
+  map("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", opts "Document symbols")
+  map("n", "<leader>fS", "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", opts "Workspace symbols")
   map("n", "<leader>ra", vim.lsp.buf.rename, opts "Rename")
   -- Neovim's default grr fills the quickfix list; use Telescope so references
   -- can be filtered and previewed in place. gri / grt get the same treatment.
+  -- (gd, <leader>D and <leader>ds above / in core/mappings.lua follow suit.)
   map("n", "grr", "<cmd>Telescope lsp_references<CR>", opts "References (Telescope)")
   map("n", "gri", "<cmd>Telescope lsp_implementations<CR>", opts "Implementations (Telescope)")
   map("n", "grt", "<cmd>Telescope lsp_type_definitions<CR>", opts "Type definitions (Telescope)")
