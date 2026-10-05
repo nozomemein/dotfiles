@@ -54,7 +54,6 @@ return {
           globalstatus = true,
           component_separators = "",
           section_separators = "",
-          disabled_filetypes = { winbar = { "NvimTree", "toggleterm", "DiffviewFiles", "DiffviewFileHistory" } },
         },
         -- left: mode / branch / file   right: diagnostics / LSP / filetype / position
         sections = {
@@ -85,13 +84,6 @@ return {
           lualine_x = {},
           lualine_y = {},
           lualine_z = { { "location", separator = caps } },
-        },
-        -- per-window file label, so splits are easy to tell apart
-        winbar = {
-          lualine_c = { { "filename", path = 1, separator = caps, color = pill(palette.blue) } },
-        },
-        inactive_winbar = {
-          lualine_c = { { "filename", path = 1, separator = caps, color = { fg = palette.text, bg = palette.grey } } },
         },
       }
     end,
