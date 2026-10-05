@@ -27,6 +27,7 @@ M.themes = {
         on_highlights = function(hl, c)
           -- make the selected completion item stand out
           hl.BlinkCmpMenuSelection = { bg = c.bg_visual, bold = true }
+          hl.TelescopePreviewLine = { fg = c.bg, bg = c.blue, bold = true }
           -- Diff highlight overrides (diffview)
           hl.DiffAdd = { fg = c.purple, bg = c.bg_highlight }
           hl.DiffChange = { fg = c.purple, bg = c.bg_highlight }
@@ -63,6 +64,8 @@ M.themes = {
           NormalFloat = { fg = "$fg", bg = "$bg1" },
           -- make the selected completion item stand out
           BlinkCmpMenuSelection = { fg = "$bg0", bg = "$bg_blue", fmt = "bold" },
+          -- the line a grep hit points to in the Telescope previewer
+          TelescopePreviewLine = { fg = "$bg0", bg = "$bg_blue", fmt = "bold" },
         },
       }
     end,
@@ -90,6 +93,7 @@ M.themes = {
         disable = { background = transparent },
         custom_highlights = {
           BlinkCmpMenuSelection = { bg = "#283457", bold = true },
+          TelescopePreviewLine = { fg = "#0f111a", bg = "#82aaff", bold = true },
         },
       }
     end,
