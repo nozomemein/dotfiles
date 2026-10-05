@@ -164,6 +164,22 @@ end, { desc = "Find & run Vim command" })
 -- comment
 -- lua/plugins/lsp.lua (on_attach).
 
+-- gitsigns: jump between changed hunks (falls back to ]c / [c in diff mode)
+map("n", "]g", function()
+  if vim.wo.diff then
+    vim.cmd.normal { "]c", bang = true }
+  else
+    require("gitsigns").nav_hunk "next"
+  end
+end, { desc = "Next git hunk" })
+map("n", "[g", function()
+  if vim.wo.diff then
+    vim.cmd.normal { "[c", bang = true }
+  else
+    require("gitsigns").nav_hunk "prev"
+  end
+end, { desc = "Prev git hunk" })
+
 -- diffview
 map("n", "<leader>gdo", "<cmd>DiffviewOpen<CR>", { desc = "DiffviewOpen" })
 map("n", "<leader>gdc", "<cmd>DiffviewClose<CR>", { desc = "DiffviewClose" })
