@@ -93,42 +93,17 @@ return {
     "akinsho/bufferline.nvim",
     lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = function()
-      local palette = require("core.theme").palette()
-      local none = "NONE"
-      return {
-        options = {
-          mode = "buffers",
-          diagnostics = "nvim_lsp",
-          show_buffer_close_icons = false,
-          show_close_icon = false,
-          indicator = { style = "none" },
-          separator_style = { " ", " " },
-          offsets = {
-            { filetype = "NvimTree", text = "", separator = true },
-          },
+    opts = {
+      options = {
+        mode = "buffers",
+        diagnostics = "nvim_lsp",
+        show_buffer_close_icons = false,
+        show_close_icon = false,
+        offsets = {
+          { filetype = "NvimTree", text = "", separator = true },
         },
-        -- current buffer as a filled pill, buffers shown in other windows in
-        -- normal text, the rest dimmed; everything on the editor background
-        highlights = {
-          fill = { bg = none },
-          background = { fg = palette.grey, bg = none },
-          buffer_visible = { fg = palette.text, bg = none },
-          buffer_selected = { fg = palette.fg, bg = palette.blue, bold = true, italic = false },
-          duplicate = { fg = palette.grey, bg = none, italic = true },
-          duplicate_visible = { fg = palette.text, bg = none, italic = true },
-          duplicate_selected = { fg = palette.fg, bg = palette.blue, italic = true },
-          modified = { fg = palette.yellow, bg = none },
-          modified_visible = { fg = palette.yellow, bg = none },
-          modified_selected = { fg = palette.fg, bg = palette.blue },
-          separator = { fg = none, bg = none },
-          separator_visible = { fg = none, bg = none },
-          separator_selected = { fg = none, bg = none },
-          offset_separator = { fg = palette.grey, bg = none },
-          trunc_marker = { fg = palette.grey, bg = none },
-        },
-      }
-    end,
+      },
+    },
   },
 
   {
