@@ -170,6 +170,33 @@ function M.lualine()
   return theme().lualine
 end
 
+---@class UiPalette
+---@field fg string text color on a colored pill
+---@field text string normal text color
+---@field green string
+---@field blue string
+---@field purple string
+---@field red string
+---@field yellow string
+---@field grey string
+
+-- Accent colors for statusline / bufferline pills, taken from the active
+-- lualine theme's mode colors so every theme gets a matching look.
+---@return UiPalette
+function M.palette()
+  local t = require("lualine.themes." .. M.lualine())
+  return {
+    fg = t.normal.a.fg,
+    text = t.normal.b.fg,
+    green = t.normal.a.bg,
+    blue = t.insert.a.bg,
+    purple = t.visual.a.bg,
+    red = t.replace.a.bg,
+    yellow = t.command.a.bg,
+    grey = t.normal.b.bg,
+  }
+end
+
 -- Configure the active theme and (re)apply it. Also used by the transparency toggle.
 function M.apply()
   local t = theme()

@@ -15,25 +15,15 @@ return {
       -- "bubbles" layout: every component is its own rounded pill drawn on
       -- the editor background. Pill colors come from the theme's mode colors
       -- so switching themes keeps the look consistent.
-      local theme = require("core.theme").lualine()
-      if type(theme) == "string" then
-        theme = vim.deepcopy(require("lualine.themes." .. theme))
-      end
+      local T = require "core.theme"
+      local theme = vim.deepcopy(require("lualine.themes." .. T.lualine()))
+      local palette = T.palette()
 
-      local fg = theme.normal.a.fg
-      local palette = {
-        green = theme.normal.a.bg,
-        blue = theme.insert.a.bg,
-        purple = theme.visual.a.bg,
-        red = theme.replace.a.bg,
-        yellow = theme.command.a.bg,
-        grey = theme.normal.b.bg,
-      }
       ---@param bg string
       ---@param gui? string
       ---@return { fg: string, bg: string, gui: string }
       local function pill(bg, gui)
-        return { fg = fg, bg = bg, gui = gui or "bold" }
+        return { fg = palette.fg, bg = bg, gui = gui or "bold" }
       end
 
       -- make b / c transparent so the gaps between pills show the editor bg
@@ -64,6 +54,7 @@ return {
           globalstatus = true,
           component_separators = "",
           section_separators = "",
+          disabled_filetypes = { winbar = { "NvimTree", "toggleterm", "DiffviewFiles", "DiffviewFileHistory" } },
         },
         -- left: mode / branch / file   right: diagnostics / LSP / filetype / position
         sections = {
@@ -95,6 +86,13 @@ return {
           lualine_y = {},
           lualine_z = { { "location", separator = caps } },
         },
+        -- per-window file label, so splits are easy to tell apart
+        winbar = {
+          lualine_c = { { "filename", path = 1, separator = caps, color = pill(palette.blue) } },
+        },
+        inactive_winbar = {
+          lualine_c = { { "filename", path = 1, separator = caps, color = { fg = palette.text, bg = palette.grey } } },
+        },
       }
     end,
   },
@@ -103,17 +101,42 @@ return {
     "akinsho/bufferline.nvim",
     lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      options = {
-        mode = "buffers",
-        diagnostics = "nvim_lsp",
-        show_buffer_close_icons = false,
-        show_close_icon = false,
-        offsets = {
-          { filetype = "NvimTree", text = "", separator = true },
+    opts = function()
+      local palette = require("core.theme").palette()
+      local none = "NONE"
+      return {
+        options = {
+          mode = "buffers",
+          diagnostics = "nvim_lsp",
+          show_buffer_close_icons = false,
+          show_close_icon = false,
+          indicator = { style = "none" },
+          separator_style = { " ", " " },
+          offsets = {
+            { filetype = "NvimTree", text = "", separator = true },
+          },
         },
-      },
-    },
+        -- current buffer as a filled pill, buffers shown in other windows in
+        -- normal text, the rest dimmed; everything on the editor background
+        highlights = {
+          fill = { bg = none },
+          background = { fg = palette.grey, bg = none },
+          buffer_visible = { fg = palette.text, bg = none },
+          buffer_selected = { fg = palette.fg, bg = palette.blue, bold = true, italic = false },
+          duplicate = { fg = palette.grey, bg = none, italic = true },
+          duplicate_visible = { fg = palette.text, bg = none, italic = true },
+          duplicate_selected = { fg = palette.fg, bg = palette.blue, italic = true },
+          modified = { fg = palette.yellow, bg = none },
+          modified_visible = { fg = palette.yellow, bg = none },
+          modified_selected = { fg = palette.fg, bg = palette.blue },
+          separator = { fg = none, bg = none },
+          separator_visible = { fg = none, bg = none },
+          separator_selected = { fg = none, bg = none },
+          offset_separator = { fg = palette.grey, bg = none },
+          trunc_marker = { fg = palette.grey, bg = none },
+        },
+      }
+    end,
   },
 
   {
