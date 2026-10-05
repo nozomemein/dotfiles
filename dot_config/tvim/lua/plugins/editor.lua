@@ -95,12 +95,6 @@ return {
   },
 
   {
-    "numToStr/Comment.nvim",
-    lazy = false,
-    opts = {},
-  },
-
-  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {
@@ -130,9 +124,9 @@ return {
 
   {
     "Wansmer/treesj",
-    keys = { "<space>m", "<space>j", "<space>s" },
+    cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {},
+    opts = { use_default_keymaps = false },
   },
 
   {

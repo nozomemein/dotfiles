@@ -34,7 +34,6 @@ end, { desc = "general format file" })
 map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
 
 -- buffers (bufferline)
-map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
 map("n", "<tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "buffer goto next" })
 map("n", "<S-tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "buffer goto prev" })
 map("n", "]b", "<cmd>BufferLineCycleNext<CR>", { desc = "buffer goto next" })
@@ -53,7 +52,7 @@ end, { desc = "buffer close" })
 
 map("n", "<leader>bx", "<cmd>BufferLineCloseOthers<CR>", { desc = "Close all buffers except current one" })
 
--- Comment
+-- Comment (builtin gc operator)
 map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
@@ -204,7 +203,7 @@ map("v", "<C-x>", function()
 end, { desc = "Decrement number under visual" })
 
 -- treesj
-map("n", "<leader>mt", "<cmd>lua require('treesj').toggle()<CR>", { desc = "Toggle Treesj" })
+map("n", "<leader>mt", "<cmd>TSJToggle<CR>", { desc = "Toggle split/join (treesj)" })
 
 -- dap
 map("n", "<F5>", ":lua require'dap'.continue()<CR>",

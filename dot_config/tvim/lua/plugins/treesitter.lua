@@ -1,7 +1,5 @@
+-- Parsers bundled with Neovim (c, lua, vim, vimdoc, query, markdown) are omitted.
 local languages = {
-  "vim",
-  "vimdoc",
-  "lua",
   "luadoc",
   "typescript",
   "javascript",
@@ -12,7 +10,6 @@ local languages = {
   "ruby",
   "go",
   "terraform",
-  "c",
   "dart",
   "graphql",
 }

@@ -16,45 +16,16 @@ local opts = {
   rocks = { enabled = false }, -- no plugin here needs luarocks
   change_detection = { notify = false },
 
-  ui = {
-    icons = {
-      ft = "\u{f0f6}",
-      lazy = "󰂠 ",
-      loaded = "\u{f058}",
-      not_loaded = "\u{f10c}",
-    },
-  },
-
   performance = {
     rtp = {
+      -- builtin runtime plugins we don't use (names must match runtime/plugin/*)
       disabled_plugins = {
-        "2html_plugin",
-        "tohtml",
-        "getscript",
-        "getscriptPlugin",
         "gzip",
-        "logipat",
-        "netrw",
-        "netrwPlugin",
-        "netrwSettings",
-        "netrwFileHandlers",
-        "matchit",
-        "tar",
         "tarPlugin",
-        "rrhelper",
-        "spellfile_plugin",
-        "vimball",
-        "vimballPlugin",
-        "zip",
         "zipPlugin",
+        "netrwPlugin", -- nvim-tree
         "tutor",
-        "rplugin",
-        "syntax",
-        "synmenu",
-        "optwin",
-        "compiler",
-        "bugreport",
-        "ftplugin",
+        "rplugin", -- remote plugin hosts; providers are disabled in options.lua
       },
     },
   },

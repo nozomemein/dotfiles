@@ -14,20 +14,15 @@ o.cursorlineopt = "number"
 o.expandtab = true
 o.shiftwidth = 2
 o.smartindent = true
-o.autoindent = true
 o.tabstop = 2
 o.softtabstop = 2
 
 opt.fillchars = { eob = " " }
 o.ignorecase = true
 o.smartcase = true
-o.hlsearch = true
-o.incsearch = true
-o.mouse = "a"
 
 -- Numbers
 o.number = true
-o.relativenumber = false
 o.numberwidth = 2
 o.ruler = false
 
