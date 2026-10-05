@@ -22,7 +22,16 @@ return {
           mappings = {
             n = { ["q"] = require("telescope.actions").close },
           },
-          file_ignore_patterns = { "node_modules/", "vendor/" },
+          -- build output and vendored deps (patterns are Lua patterns on the relative path)
+          file_ignore_patterns = {
+            "^%.git/",
+            "node_modules/",
+            "vendor/",
+            "^target/", -- rust
+            "^build/", -- flutter / gradle
+            "%.dart_tool/",
+            "%.fvm/",
+          },
         },
       }
     end,

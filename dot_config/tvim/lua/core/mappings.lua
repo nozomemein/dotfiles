@@ -188,6 +188,19 @@ map("n", "<leader>rr", ":RSpecRerun<CR>", { desc = "Rerun spec", silent = true }
 map("n", "<leader>rF", ":RSpecOnlyFailures<CR>", { desc = "Run only failed spec", silent = true })
 map("n", "<leader>rs", ":RSpecShowLastResult<CR>", { desc = "Show spec results", silent = true })
 
+-- Flutter (flutter-tools)
+map("n", "<leader>Fr", "<cmd>FlutterRun<CR>", { desc = "Flutter run (via dap)" })
+map("n", "<leader>FR", "<cmd>FlutterRestart<CR>", { desc = "Flutter hot restart" })
+map("n", "<leader>Fh", "<cmd>FlutterReload<CR>", { desc = "Flutter hot reload" })
+map("n", "<leader>Fq", "<cmd>FlutterQuit<CR>", { desc = "Flutter quit" })
+map("n", "<leader>Fd", "<cmd>FlutterDevices<CR>", { desc = "Flutter devices" })
+map("n", "<leader>Fe", "<cmd>FlutterEmulators<CR>", { desc = "Flutter emulators" })
+map("n", "<leader>Fo", "<cmd>FlutterOutlineToggle<CR>", { desc = "Flutter widget outline" })
+map("n", "<leader>Fl", "<cmd>FlutterLogToggle<CR>", { desc = "Flutter log" })
+map("n", "<leader>Ft", "<cmd>FlutterDevTools<CR>", { desc = "Flutter DevTools" })
+map("n", "<leader>Fp", "<cmd>FlutterPubGet<CR>", { desc = "Flutter pub get" })
+map("n", "<leader>FL", "<cmd>FlutterLspRestart<CR>", { desc = "Flutter LSP restart" })
+
 -- dial.nvim
 map("n", "<C-a>", function()
   require("dial.map").manipulate("increment", "normal")

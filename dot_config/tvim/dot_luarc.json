@@ -6,6 +6,7 @@
     "$VIMRUNTIME/lua",
     "~/.local/share/tvim/lazy/lazy.nvim/lua",
     "~/.local/share/tvim/lazy/neotest/lua",
+    "~/.local/share/tvim/lazy/nvim-dap/lua",
     "${3rd}/luv/library"
   ],
   "workspace.checkThirdParty": false,

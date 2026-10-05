@@ -68,6 +68,20 @@ return {
           lualine_x = {
             { "diagnostics", separator = caps, color = { bg = palette.grey } },
             gap,
+            {
+              -- Device the Flutter app is running on. flutter-tools fills
+              -- vim.g.flutter_tools_decorations.device while an app runs
+              -- (decorations.statusline.device = true in plugins/flutter.lua).
+              -- Returning "" makes lualine skip the component, so this pill only
+              -- shows up during a Flutter session.
+              function()
+                local d = vim.g.flutter_tools_decorations
+                return d and d.device or ""
+              end,
+              separator = caps,
+              color = pill(palette.green),
+            },
+            gap,
             { "lsp_status", separator = caps, color = pill(palette.purple) },
             gap,
           },
