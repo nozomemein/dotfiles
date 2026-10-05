@@ -162,6 +162,7 @@ map("n", "<leader>fc", function()
 end, { desc = "Find & run Vim command" })
 
 -- LSP buffer-local mappings (K, gd, <leader>ca, <leader>ra, ...) live in
+-- comment
 -- lua/plugins/lsp.lua (on_attach).
 
 -- diffview
@@ -169,6 +170,8 @@ map("n", "<leader>gdo", "<cmd>DiffviewOpen<CR>", { desc = "DiffviewOpen" })
 map("n", "<leader>gdc", "<cmd>DiffviewClose<CR>", { desc = "DiffviewClose" })
 map("n", "<leader>gdb", "<cmd>DiffviewFileHistory<CR>", { desc = "Diffview on current branch" })
 map("n", "<leader>gdf", "<cmd>DiffviewFileHistory %<CR>", { desc = "Diffview on current file" })
+map("n", "<leader>gdm", "<cmd>BranchDiff<CR>", { desc = "Diff this branch against main" })
+map("n", "<leader>gdl", "<cmd>BranchLog<CR>", { desc = "Commits on this branch" })
 
 -- neotest
 map("n", "<leader>nr", "<Cmd>lua require('neotest').run.run()<CR>", { desc = "Run the nearest test" })
