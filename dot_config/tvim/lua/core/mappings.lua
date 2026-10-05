@@ -186,9 +186,6 @@ map("n", "<leader>rr", ":RSpecRerun<CR>", { desc = "Rerun spec", silent = true }
 map("n", "<leader>rF", ":RSpecOnlyFailures<CR>", { desc = "Run only failed spec", silent = true })
 map("n", "<leader>rs", ":RSpecShowLastResult<CR>", { desc = "Show spec results", silent = true })
 
--- Flutter
-map("n", "<leader>rl", ":FlutterLspRestart<CR>", { desc = "Restart Flutter LSP" })
-
 -- dial.nvim
 map("n", "<C-a>", function()
   require("dial.map").manipulate("increment", "normal")

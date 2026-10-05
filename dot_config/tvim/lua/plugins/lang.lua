@@ -1,21 +1,5 @@
 return {
-  { "slim-template/vim-slim", ft = "slim" },
-  { "tpope/vim-rails", ft = { "ruby", "eruby", "slim", "haml", "yaml" } },
-  { "noprompt/vim-yardoc", ft = "ruby" },
   { "qnighy/lalrpop.vim", ft = "lalrpop" },
-
-  {
-    "akinsho/flutter-tools.nvim",
-    ft = "dart",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
-    },
-    opts = {
-      fvm = true, -- uses <workspace>/.fvm/flutter_sdk
-      root_patterns = { ".git", "pubspec.yaml" },
-    },
-  },
 
   {
     "iamcco/markdown-preview.nvim",
