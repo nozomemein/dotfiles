@@ -45,6 +45,29 @@ return {
         width = 30,
         preserve_window_proportions = true,
       },
+      actions = {
+        open_file = {
+          window_picker = {
+            enable = true,
+            -- with splits, always open in the left-most (then top-most) editor
+            -- window instead of asking which one
+            picker = function()
+              local best, best_pos
+              for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+                local buf = vim.api.nvim_win_get_buf(win)
+                local floating = vim.api.nvim_win_get_config(win).relative ~= ""
+                if not floating and vim.bo[buf].buftype == "" and vim.bo[buf].filetype ~= "NvimTree" then
+                  local row, col = unpack(vim.api.nvim_win_get_position(win))
+                  if not best_pos or col < best_pos[2] or (col == best_pos[2] and row < best_pos[1]) then
+                    best, best_pos = win, { row, col }
+                  end
+                end
+              end
+              return best or -1 -- -1: let nvim-tree fall back to its own target window
+            end,
+          },
+        },
+      },
       renderer = {
         root_folder_label = false,
         highlight_git = true,
