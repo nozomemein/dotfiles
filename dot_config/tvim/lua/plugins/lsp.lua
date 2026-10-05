@@ -16,6 +16,11 @@ local function on_attach(bufnr)
   end, opts "List workspace folders")
   map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
   map("n", "<leader>ra", vim.lsp.buf.rename, opts "Rename")
+  -- Neovim's default grr fills the quickfix list; use Telescope so references
+  -- can be filtered and previewed in place. gri / grt get the same treatment.
+  map("n", "grr", "<cmd>Telescope lsp_references<CR>", opts "References (Telescope)")
+  map("n", "gri", "<cmd>Telescope lsp_implementations<CR>", opts "Implementations (Telescope)")
+  map("n", "grt", "<cmd>Telescope lsp_type_definitions<CR>", opts "Type definitions (Telescope)")
   map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code action")
 end
 
