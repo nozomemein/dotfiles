@@ -1,18 +1,27 @@
 ---
 name: mbx
-description: mbx（Mr. Boxington）導入済みの環境でCargoのbuild・test・check・clippyを実行する時、worktreeのtargetを管理下へ移す時、Rustのビルド容量やGCを調べる時に使う。
+description: Rustの作業でCargo（cargo）を実行する前に使う。build・test・check・clippy・nextest・fmt・metadata・cleanなど、直接実行とjust・task・script経由の実行を含む。mbxの導入有無は読み込んだ後に確認し、導入済みならそのセッションのCargoをmbx経由に統一、未導入なら通常Cargoで続行する。worktreeのtarget移行やRustの容量・GC調査にも使う。
 ---
 
 # mbx
 
-通常の `cargo` でmbxの公式shimを使い、成果物キャッシュとtargetの管理を区別する。実行時のshim・PATH・mbx設定をこのdotfiles repoへ追加しない。
+Cargoを使う作業では、mbxの有無がまだ分からなくてもこのskillを読む。導入済みと確認できたら、そのセッションではmbxをCargoの起動経路にする。成果物キャッシュとtargetの管理を区別し、実行時のshim・PATH・mbx設定をこのdotfiles repoへ追加しない。
 
-## Cargoの起動経路
+## セッションの起動経路を決める
 
-- 作業開始時に `command -v cargo`、`mbx --version`、必要に応じて `mbx doctor` を確認する。新しいshellでの確認だけでは、起動済みのagentやeditorが同じPATHを使う証拠にはならない。
-- 普段のbuild / test / check / clippy / nextestは通常の `cargo` を使う。公式shimの設定に加えて、自作の振り分けスクリプトやmiseを必須にしない。
-- `~/.cargo/bin/cargo` の直指定や `MBX_DISABLE=1` はmbxを迂回する。plain Cargoとの比較など、迂回する理由がある場合に限る。
-- 未導入・未有効な環境ではその事実を伝える。導入が依頼範囲に含まれる場合は `mbx setup` と公式shimのPATHを設定し、global設定は `mbx settings` で管理する。容量予算やmachine固有のpathは現地の設定から確認する。
+初回のCargo実行前に、実行する環境で `command -v mbx` と `mbx --version` を確認する。Macでの確認をVMやcontainerの確認として流用しない。
+
+- mbxが見つからなければ、このskillの残りを適用せず通常のCargoで続行する。ユーザーが導入を依頼していない限り、インストールや設定変更を持ち込まない。
+- mbxを実行できたら、そのセッション・実行環境の方針を「mbx経由」として保持する。以降のCargo実行ごとに導入判定をやり直す必要はない。別host / VM / containerへ移った場合はその環境で判定する。
+- mbxが見つかるが起動に失敗する場合は、未導入と同一視せず原因を確認する。導入済みと判定した後も、エラーを理由に黙ってplain Cargoへ切り替えない。
+
+## 導入済みセッションでのCargo実行
+
+- `command -v cargo` と必要に応じて `mbx doctor` で起動経路を確認する。公式shimが有効なら通常の `cargo` を使う。shellのPATHがまだplain Cargoを指す場合は、`cargo build ...` を `mbx build ...`、`cargo test ...` を `mbx test ...` のように明示実行してmbx経由を維持できる。コンパイルしないCargoコマンドの扱いも、mbx自身のpassthroughに任せる。
+- shell commandごとに環境が作り直されるtoolでは、一度の `export PATH=...` が次の呼び出しにも残ると仮定しない。公式shimのPATHを各呼び出しに継承させるか、明示的な `mbx <Cargo subcommand>` を使う。
+- just・task・scriptがCargoを起動する場合も、子プロセスへ公式shimのPATHを渡す。新しいshellでの確認だけでは、起動済みのagentやeditorが同じPATHを使う証拠にはならない。shimが未準備なら、依頼された作業のCargoコマンドを明示mbx経由で実行する方法を選ぶ。
+- plain Cargoでの比較をユーザーが指定した場合など、作業上必要な迂回は区別して記録する。それ以外では `~/.cargo/bin/cargo` の直指定や `MBX_DISABLE=1` を使わない。
+- 起動経路を揃えるためだけにrepoのjustfileや自作の振り分けスクリプトを追加しない。miseも必須にしない。永続的な導入・有効化が依頼範囲に含まれる場合は `mbx setup` と公式shimのPATHを設定し、global設定は `mbx settings` で管理する。容量予算やmachine固有のpathは現地の設定から確認する。
 
 ## targetが管理下にあるか
 
