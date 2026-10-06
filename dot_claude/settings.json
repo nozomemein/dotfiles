@@ -157,7 +157,8 @@
     "atlassian@claude-plugins-official": true,
     "github@claude-plugins-official": true,
     "codex@openai-codex": false,
-    "frontend-design@claude-plugins-official": true
+    "frontend-design@claude-plugins-official": true,
+    "cc-plugin-you-should-know@builtin": true
   },
   "language": "Japanese",
   "effortLevel": "high",
@@ -167,5 +168,6 @@
   "agentPushNotifEnabled": false,
   "feedbackSurveyState": {
     "lastShownTime": 1753999678646
-  }
+  },
+  "advisorModel": "fable"
 }
