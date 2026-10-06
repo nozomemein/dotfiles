@@ -1,6 +1,10 @@
--- Keymaps. General editor / plugin keymaps come first, personal additions
--- follow. Plugin-specific keymaps use <cmd> or a lazy require so they work
--- with lazy-loading.
+-- All keymaps live here.
+--   * global maps run when this module is required (core/init.lua)
+--   * M.lsp(bufnr) holds the buffer-local LSP maps; configs/lsp.lua calls it
+--     from LspAttach
+-- Plugin-specific keymaps use <cmd> or a lazy require so they work with
+-- lazy-loading.
+local M = {}
 local map = vim.keymap.set
 
 ---------------------------------------------------------------------------
@@ -168,10 +172,6 @@ map("n", "<leader>fc", function()
   require("telescope.builtin").commands(dropdown)
 end, { desc = "Find & run Vim command" })
 
--- LSP buffer-local mappings (K, gd, <leader>ca, <leader>ra, ...) live in
--- comment
--- lua/plugins/lsp.lua (on_attach).
-
 -- gitsigns: jump between changed hunks (falls back to ]c / [c in diff mode)
 map("n", "]g", function()
   if vim.wo.diff then
@@ -275,3 +275,37 @@ map("n", "mn", "<cmd>BookmarksGotoNext<CR>", { desc = "Next bookmark" })
 map("n", "mp", "<cmd>BookmarksGotoPrev<CR>", { desc = "Prev bookmark" })
 map("n", "ml", "<cmd>BookmarksLists<CR>", { desc = "Bookmark lists" })
 map("n", "mt", "<cmd>BookmarksTree<CR>", { desc = "Bookmark tree view" })
+
+---------------------------------------------------------------------------
+-- LSP (buffer-local, set on LspAttach)
+---------------------------------------------------------------------------
+-- Navigation goes through Telescope: direct jump for a single result, picker
+-- with preview for several. gD stays native (Telescope has no declaration
+-- picker). grr / gri / grt override Neovim's quickfix defaults.
+---@param bufnr integer
+function M.lsp(bufnr)
+  local function opts(desc)
+    return { buffer = bufnr, desc = "LSP " .. desc }
+  end
+
+  map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
+  map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts "Go to definition")
+  map("n", "grr", "<cmd>Telescope lsp_references<CR>", opts "References")
+  map("n", "gri", "<cmd>Telescope lsp_implementations<CR>", opts "Implementations")
+  map("n", "grt", "<cmd>Telescope lsp_type_definitions<CR>", opts "Type definitions")
+  map("n", "<leader>D", "<cmd>Telescope lsp_type_definitions<CR>", opts "Go to type definition")
+  map("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", opts "Document symbols")
+  map("n", "<leader>fS", "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", opts "Workspace symbols")
+
+  map("n", "K", vim.lsp.buf.hover, opts "Show hover")
+  map("n", "<leader>ra", vim.lsp.buf.rename, opts "Rename")
+  map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code action")
+
+  map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts "Add workspace folder")
+  map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts "Remove workspace folder")
+  map("n", "<leader>wl", function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, opts "List workspace folders")
+end
+
+return M
