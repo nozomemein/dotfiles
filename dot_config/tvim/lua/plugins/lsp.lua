@@ -47,6 +47,29 @@ local function diagnostic_config()
   }
 end
 
+-- conform formatter running RuboCop with the given autocorrect flag
+---@param autocorrect "-a"|"-A"
+---@return conform.FileFormatterConfig
+local function rubocop_formatter(autocorrect)
+  local function in_bundle(ctx)
+    return vim.fs.root(ctx.dirname, "Gemfile") ~= nil
+  end
+  return {
+    command = function(_, ctx)
+      return in_bundle(ctx) and "bundle" or "rubocop"
+    end,
+    args = function(_, ctx)
+      local args = { "--server", autocorrect, "-f", "quiet", "--stderr", "--stdin", "$FILENAME" }
+      if in_bundle(ctx) then
+        table.insert(args, 1, "exec")
+        table.insert(args, 2, "rubocop")
+      end
+      return args
+    end,
+    exit_codes = { 0, 1 },
+  }
+end
+
 ---@type string[] server names as known to nvim-lspconfig
 local servers = {
   "lua_ls",
@@ -147,24 +170,12 @@ return {
         eruby = { "erb-formatter" },
       },
       formatters = {
-        -- Stricter than the LSP's format: -A also applies "unsafe" autocorrects
-        -- (e.g. adding the frozen_string_literal comment), which is what makes
-        -- most remaining RuboCop warnings disappear on <leader>fm. Runs through
-        -- bundler when the project has a Gemfile so the project's RuboCop and
-        -- plugins are used.
-        rubocop = {
-          command = function(_, ctx)
-            return vim.fs.root(ctx.dirname, "Gemfile") and "bundle" or "rubocop"
-          end,
-          args = function(_, ctx)
-            local args = { "--server", "-A", "-f", "quiet", "--stderr", "--stdin", "$FILENAME" }
-            if vim.fs.root(ctx.dirname, "Gemfile") then
-              table.insert(args, 1, "exec")
-              table.insert(args, 2, "rubocop")
-            end
-            return args
-          end,
-        },
+        -- "rubocop" (-a, safe autocorrects only) backs <leader>fm;
+        -- "rubocop_unsafe" (-A, all autocorrects, may change semantics) backs
+        -- <leader>fM. Both run through bundler when the project has a Gemfile
+        -- so the project's RuboCop version and plugins are used.
+        rubocop = rubocop_formatter "-a",
+        rubocop_unsafe = rubocop_formatter "-A",
       },
     },
   },

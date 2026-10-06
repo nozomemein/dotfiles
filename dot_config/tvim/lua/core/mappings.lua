@@ -30,6 +30,13 @@ map({ "n", "x" }, "<leader>fm", function()
   require("conform").format { lsp_fallback = true }
 end, { desc = "general format file" })
 
+-- Aggressive variant: formatters that may change semantics (RuboCop -A).
+-- Filetypes without an entry here behave like <leader>fm.
+local aggressive_formatters = { ruby = { "rubocop_unsafe" } }
+map({ "n", "x" }, "<leader>fM", function()
+  require("conform").format { lsp_fallback = true, formatters = aggressive_formatters[vim.bo.filetype] }
+end, { desc = "general format file (aggressive)" })
+
 -- global lsp mappings
 map("n", "<leader>ds", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Diagnostics (buffer)" })
 map("n", "<leader>dS", "<cmd>Telescope diagnostics<CR>", { desc = "Diagnostics (workspace)" })
