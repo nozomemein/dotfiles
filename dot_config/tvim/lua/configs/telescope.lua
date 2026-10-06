@@ -34,10 +34,10 @@ return {
   },
   pickers = {
     -- LSP result lists: wider file column, keep the matched line visible
-    lsp_references = { fname_width = 45, show_line = true },
-    lsp_definitions = { fname_width = 45, show_line = true },
-    lsp_implementations = { fname_width = 45, show_line = true },
-    lsp_type_definitions = { fname_width = 45, show_line = true },
+    lsp_references = { fname_width = 45, show_line = true, file_ignore_patterns = {} },
+    lsp_definitions = { fname_width = 45, show_line = true, file_ignore_patterns = {} },
+    lsp_implementations = { fname_width = 45, show_line = true, file_ignore_patterns = {} },
+    lsp_type_definitions = { fname_width = 45, show_line = true, file_ignore_patterns = {} },
     diagnostics = { line_width = "full" },
   },
 }
