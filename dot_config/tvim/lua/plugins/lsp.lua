@@ -143,7 +143,28 @@ return {
         lua = { "stylua" },
         go = { "goimports" },
         rust = { "rustfmt" },
+        ruby = { "rubocop" },
         eruby = { "erb-formatter" },
+      },
+      formatters = {
+        -- Stricter than the LSP's format: -A also applies "unsafe" autocorrects
+        -- (e.g. adding the frozen_string_literal comment), which is what makes
+        -- most remaining RuboCop warnings disappear on <leader>fm. Runs through
+        -- bundler when the project has a Gemfile so the project's RuboCop and
+        -- plugins are used.
+        rubocop = {
+          command = function(_, ctx)
+            return vim.fs.root(ctx.dirname, "Gemfile") and "bundle" or "rubocop"
+          end,
+          args = function(_, ctx)
+            local args = { "--server", "-A", "-f", "quiet", "--stderr", "--stdin", "$FILENAME" }
+            if vim.fs.root(ctx.dirname, "Gemfile") then
+              table.insert(args, 1, "exec")
+              table.insert(args, 2, "rubocop")
+            end
+            return args
+          end,
+        },
       },
     },
   },
