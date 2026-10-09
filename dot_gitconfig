@@ -11,3 +11,12 @@
 
 [commit]
 	verbose = true
+
+# GitHub auth via gh (what `gh auth setup-git` writes). The empty helper line
+# resets helpers inherited from the system config so gh is the only one used.
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
