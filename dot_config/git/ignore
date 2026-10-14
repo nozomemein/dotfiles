@@ -1,5 +1,6 @@
 # Claude Code
 **/.claude/settings.local.json
+**/.claude/.cc-writes/
 
 # Secrets / env
 .env
@@ -45,4 +46,3 @@ compile_commands.json
 # macOS
 .DS_Store
 
-**/.claude/.cc-writes/
