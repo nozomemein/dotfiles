@@ -5,8 +5,27 @@
 	path = ~/.config/git/delta.conf
 	path = ~/.gitconfig.local
 
+[init]
+	defaultBranch = main
+
+[branch]
+	# newest branches first in `git branch`
+	sort = -committerdate
+
+[fetch]
+	# drop remote-tracking refs for branches deleted on the remote
+	prune = true
+
 [pull]
 	rebase = true
+
+[push]
+	# first push of a new branch sets upstream without -u
+	autoSetupRemote = true
+
+[rerere]
+	# remember conflict resolutions and replay them on the next rebase
+	enabled = true
 
 [rebase]
 	autoSquash = true
