@@ -5,6 +5,9 @@
 	path = ~/.config/git/delta.conf
 	path = ~/.gitconfig.local
 
+[pull]
+	rebase = true
+
 [rebase]
 	autoSquash = true
 	autoStash = true
