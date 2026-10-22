@@ -128,7 +128,7 @@ EOF
   if [[ "$(uname -m)" == arm64 && -x /opt/homebrew/bin/brew ]]; then
     brew_bin=/opt/homebrew/bin/brew
   fi
-  openssl_prefix="$("$brew_bin" --prefix openssl@3)" || exit
+  openssl_prefix="$("$brew_bin" --prefix openssl@4)" || exit
   readline_prefix="$("$brew_bin" --prefix readline)" || exit
   libyaml_prefix="$("$brew_bin" --prefix libyaml)" || exit
   opt_dir="$openssl_prefix:$readline_prefix:$libyaml_prefix"
@@ -163,6 +163,7 @@ EOF
       --enable-zjit=stats \
       "--prefix=$ruby_prefix" \
       --disable-install-doc \
+      "--with-openssl-dir=$openssl_prefix" \
       "--with-opt-dir=$opt_dir" || return
     run make -j "$jobs" all || return
     run make install || return
