@@ -74,7 +74,7 @@
     // Catppuccin Blur: macOS window blur variants
     //   bases: Espresso (near-black) / Mocha (dark navy) etc.
     //   suffixes: "[Light]" (less blur) / "[Heavy]" (more blur)
-    "dark": "Catppuccin Mocha (Blur)"
+    "dark": "Wakaba"
   },
   "buffer_font_size": 14,
   "autosave": {
