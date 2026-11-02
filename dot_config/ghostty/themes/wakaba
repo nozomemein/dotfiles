@@ -1,0 +1,25 @@
+# Wakaba: the terminal half of the Zed theme (~/.config/zed/themes/wakaba.json)
+# and the tvim colorscheme (~/.config/tvim/themes/wakaba). Keep in sync by hand.
+palette = 0=#2c3033
+palette = 1=#ff6b6b
+palette = 2=#8fe3a0
+palette = 3=#e2c391
+palette = 4=#7fb4ff
+palette = 5=#c7a3e0
+palette = 6=#5ed6cb
+palette = 7=#d6d8d9
+palette = 8=#545a5e
+palette = 9=#ff8f8f
+palette = 10=#b0f0bb
+palette = 11=#f0d4a3
+palette = 12=#a5cfff
+palette = 13=#dcc0ee
+palette = 14=#8fe6dd
+palette = 15=#e9ebec
+
+background = #161819
+foreground = #d6d8d9
+cursor-color = #8fe3a0
+cursor-text = #161819
+selection-background = #29382f
+selection-foreground = #e9ebec
