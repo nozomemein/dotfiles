@@ -3,10 +3,11 @@
 -- Everything else (plugin spec, lualine theme, lazy install colorscheme,
 -- transparency toggle) is derived from the entry in `M.themes`.
 
----@alias ThemeName "tokyonight"|"bamboo"|"oldworld"|"material"
+---@alias ThemeName "wakaba"|"tokyonight"|"bamboo"|"oldworld"|"material"
 
 ---@class ThemeEntry
----@field plugin string lazy.nvim plugin name ("owner/repo")
+---@field plugin? string lazy.nvim plugin name ("owner/repo"); omit for a local theme
+---@field dir? string local plugin directory (used instead of `plugin`)
 ---@field colorscheme string argument for :colorscheme
 ---@field lualine string lualine theme name (lua/lualine/themes/<name>.lua)
 ---@field setup fun(transparent: boolean) configures the plugin; runs before :colorscheme
@@ -17,12 +18,23 @@
 ---@field themes table<ThemeName, ThemeEntry>
 local M = {}
 
-M.current = "oldworld"
+M.current = "wakaba"
 M.transparent = true
 
 -- Each entry: plugin repo, the :colorscheme name, the lualine theme name,
 -- and a setup(transparent) function that configures the plugin.
 M.themes = {
+  -- Local colorscheme, lives in themes/wakaba (the Neovim half of the Zed
+  -- theme in ~/.config/zed/themes/wakaba.json).
+  wakaba = {
+    dir = vim.fn.stdpath "config" .. "/themes/wakaba",
+    colorscheme = "wakaba",
+    lualine = "wakaba",
+    setup = function(transparent)
+      require("wakaba").setup { transparent = transparent }
+    end,
+  },
+
   tokyonight = {
     plugin = "folke/tokyonight.nvim",
     colorscheme = "tokyonight",
@@ -152,12 +164,16 @@ end
 -- lazy.nvim plugin spec for the active theme (used by plugins/ui.lua)
 ---@return LazyPluginSpec
 function M.spec()
-  return {
-    theme().plugin,
-    lazy = false,
-    priority = 1000,
-    config = M.apply,
-  }
+  local t = theme()
+  ---@type LazyPluginSpec
+  local spec = { lazy = false, priority = 1000, config = M.apply }
+  if t.dir then
+    spec.dir = t.dir
+    spec.name = t.colorscheme
+  else
+    spec[1] = t.plugin
+  end
+  return spec
 end
 
 ---@return string

@@ -17,6 +17,8 @@ lua/core/
 lua/plugins/*.lua        lazy.nvim specs only (what to install, when to load)
 lua/configs/*.lua        option tables / setup functions for the bigger plugins,
                          referenced from the specs
+themes/<name>/           local colorschemes loaded as lazy.nvim `dir` plugins
+                         (colors/, lua/<name>/, lua/lualine/themes/)
 ```
 
 Rules of thumb:
